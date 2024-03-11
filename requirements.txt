@@ -1,0 +1,9 @@
+django
+django-taggit
+django-crispy-forms
+pillow
+django-import-export
+django-jazzmin
+psycopg2-binary
+django-environ
+shortuuid

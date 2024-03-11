@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="06d50a60-297b-4055-9bd0-b0a071a215d6" name="postgres@localhost Mapping">
+      <data-sources db="7c2432a4-0b86-4479-9370-3f19d934b173" ddl="dcc55dce-fce1-4e3f-9ab8-88471d209845" />
+      <scope>
+        <node kind="database" negative="1" />
+      </scope>
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="dcc55dce-fce1-4e3f-9ab8-88471d209845" />
+          <option name="name" value="postgres@localhost (DDL)" />
+          <option name="dbmsName" value="POSTGRES" />
+          <option name="urls">
+            <array />
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
