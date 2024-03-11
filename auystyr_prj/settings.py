@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     "import_export",
         
     "django.contrib.admin",
+    "rest_framework",
+    "rest_framework.authtoken"
 
 
 ]
