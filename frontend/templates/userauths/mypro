@@ -1,0 +1,561 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link href="{% static 'assets/Auystyr/bootstrap.min.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/Auystyr/main/train2.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/profile.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+          >&times;</a
+        >
+        <div
+          style="width: 100%; height: 30px"
+          style="margin-left: 20px; margin-top: 20px"
+        >
+          <div class="d-flex flex-row" id="menu_profile">
+            <div class="d-flex align-items-center">
+              <img
+                class="ava"
+                src="{{request.user.profile.image.url}}"
+                alt=""
+              />
+            </div>
+            <div
+              class="d-flex flex-column align-items-start justify-content-start info"
+              style="margin-left: 8px"
+            >
+              <strong
+                ><p class="text_menu_info" style="font-size: 18px">
+                  {{request.user.profile.full_name}}
+                </p>
+                <p>@{{request.user.username}}</p></strong
+              >
+            </div>
+          </div>
+          <div
+            class="menu_btn_top"
+            style="
+              width: 80%;
+              height: auto;
+              margin-top: 30px;
+              margin-left: 20px;
+            "
+          >
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-row both" id="left_menu">
+                <img
+                  class="left-image"
+                  src="{% static 'assets/Auystyr/main/mainphoto/ic_home.png' %}"
+                  alt=""
+                />
+                <p class="left-text">Main</p>
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-row both" id="left_menu">
+                <img
+                  class="left-image"
+                  src="{% static 'assets/Auystyr/main/mainphoto/exchange.png' %}"
+                  alt=""
+                />
+                <p class="left-text">Exchange</p>
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-row both" id="left_menu">
+                <img
+                  class="left-image"
+                  src="{% static 'assets/Auystyr/main/mainphoto/message.png' %}"
+                  alt=""
+                />
+                <p class="left-text">Message</p>
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-row both" id="left_menu">
+                <img
+                  class="left-image"
+                  src="{% static 'assets/Auystyr/main/mainphoto/events.png' %}"
+                  alt=""
+                />
+                <p class="left-text">Events</p>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-row both" id="left_menu">
+                <img
+                  class="left-image"
+                  src="{% static 'assets/Auystyr/main/mainphoto/quiz.png' %}"
+                  alt=""
+                />
+                <p class="left-text">Quiz</p>
+              </div>
+            </div>
+
+            <div class="gray-line"></div>
+
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-row both" id="left_menu">
+                <img
+                  class="left-image"
+                  src="{% static 'assets/Auystyr/main/mainphoto/about_us.png' %}"
+                  alt=""
+                />
+                <p class="left-text">About us</p>
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-row both" id="left_menu">
+                <img
+                  class="left-image"
+                  src="{% static 'assets/Auystyr/main/mainphoto/settings.png' %}"
+                  alt=""
+                />
+                <p class="left-text">Settings</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span id="onClickMenuMobile" onclick="openNav()">&#9776;</span>
+      <div class="left-head">
+        <img
+          class="logo-im"
+          style="align-items: center"
+          src="{% static 'assets/Auystyr/main/mainphoto/new_header.png' %}"
+          alt=""
+        />
+      </div>
+      <div class="center-head">
+        <input
+          class="input"
+          id="topSearch"
+          type="text"
+          placeholder="Search Books"
+        />
+        <img
+          class="logo_mobile"
+          id="centerMobileLogo"
+          src="{% static 'assets/Auystyr/images/new_logo.png' %}"
+          alt=""
+        />
+      </div>
+      <img
+        class="ava"
+        id="avatarUserPC"
+        src="{{request.user.profile.image.url}}"
+        alt=""
+      />
+      <div class="right-head">
+        <div class="together-right">
+          <div class="dropdown">
+            <a
+              class="btn bg-white"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img src="{% static 'assets/Auystyr/img/dropDown.png' %}" class="dropImage" alt="" />
+            </a>
+            <ul class="dropdown-menu wi">
+              <li>
+                <a class="dropdown-item" href="#">
+                  <div
+                    class="d-flex flex-row justify-content-between align-items-center"
+                  >
+                    <div class="d-flex flex-row" id="row_profile">
+                      <div class="d-flex align-items-center">
+                        <img
+                          class="ava"
+                          src="{{request.user.profile.image.url}}"
+                          alt=""
+                        />
+                      </div>
+                      <div
+                        class="d-flex flex-column align-items-start justify-content-start info"
+                      >
+                        <p class="text">{{request.user.profile.full_name}}</p>
+                        <p>@{{request.user.username}}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="d-flex flex-row align-items-center">
+                        <img
+                          class="arrow"
+                          src="{% static 'assets/Auystyr/main/mainphoto/arrow-right.png' %}"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <hr style="color: gray" />
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  <div class="d-flex flex-row align-items-center">
+                    <img
+                      class="dropdown-im"
+                      src="{% static 'assets/Auystyr/main/mainphoto/theme.png' %}"
+                      alt=""
+                    />
+                    <p style="font-size: 14px">Theme</p>
+                  </div>
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="#">
+                  <div class="d-flex flex-row align-items-center">
+                    <img
+                      class="dropdown-im"
+                      src="{% static 'assets/Auystyr/main/mainphoto/log_out.png' %}"
+                      alt=""
+                    />
+                    <p style="font-size: 14px">Log out</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /// -->
+    <div class="left-side">
+      <div class="left">
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-row both" id="left_menu">
+            <img
+              class="left-image"
+              src="{% static 'assets/Auystyr/main/mainphoto/ic_home.png' %}"
+              alt=""
+            />
+            <p class="left-text">Main</p>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-row both" id="left_menu">
+            <img
+              class="left-image"
+              src="{% static 'assets/Auystyr/main/mainphoto/exchange.png' %}"
+              alt=""
+            />
+            <p class="left-text">Exchange</p>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-row both" id="left_menu">
+            <img
+              class="left-image"
+              src="{% static 'assets/Auystyr/main/mainphoto/message.png' %}"
+              alt=""
+            />
+            <p class="left-text">Message</p>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-row both" id="left_menu">
+            <img
+              class="left-image"
+              src="{% static 'assets/Auystyr/main/mainphoto/events.png' %}"
+              alt=""
+            />
+            <p class="left-text">Events</p>
+          </div>
+        </div>
+
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-row both" id="left_menu">
+            <img
+              class="left-image"
+              src="{% static 'assets/Auystyr/main/mainphoto/quiz.png' %}"
+              alt=""
+            />
+            <p class="left-text">Quiz</p>
+          </div>
+        </div>
+
+        <div class="gray-line"></div>
+
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-row both" id="left_menu">
+            <img
+              class="left-image"
+              src="{% static 'assets/Auystyr/main/mainphoto/about_us.png' %}"
+              alt=""
+            />
+            <p class="left-text">About us</p>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-row both" id="left_menu">
+            <img
+              class="left-image"
+              src="{% static 'assets/Auystyr/main/mainphoto/settings.png' %}"
+              alt=""
+            />
+            <p class="left-text">Settings</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container px-0 center">
+        <div class="compleateProfile">
+          <div class="row d-flex justify-content-center align-items">
+            <div class="col">
+              <div class="card border-0">
+                <div class="d-flex flex-row background_user">
+                  <img src="{% static 'assets/Auystyr/img/Profile_info.png' %}" alt="" class="img-fluid">
+                </div>
+
+                <div class="d-flex justify-content-between profBackDown">
+                  <div class="d-flex justify-content-center">
+                    <div class="d-flex flex-column image_user">
+                      <img
+                        src="{% static 'assets/Auystyr/img/profileImage.png  ' %}"
+                        alt=""
+                        class="img-fluid"
+                        id="image_avatar_users"
+                      />
+                      <strong
+                        ><h5
+                          class="userNickNameMobile"
+                          style="
+                            margin-top: 20px;
+                            margin-left: 20px;
+                            font-size: 20px;
+                          "
+                        >
+                          {{request.user.username}}
+                        </h5></strong
+                      >
+                      <!-- <h2>Star Rating</h2> -->
+                      <div class="list-unstyled">
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star checked"></span>
+                      <span class="fa fa-star"></span>
+                      <span class="fa fa-star"></span>
+                    </div>
+                    </div>
+                    <div class="d-flex flex-column ms-4">
+                      <h5 class="userNickName">@{{request.user.username}}</h5>
+                    </div>
+                  </div>
+                  <div class="d-flex text-center" id="addPostBtnId">
+                    <div
+                      class="d-flex justify-content-center align-items-center addPostButton"
+                      id="addPostBtnId"
+                    >
+                      <img
+                        src="{% static 'assets/Auystyr/img/addPostButton.png' %}"
+                        alt=""
+                        class="img-fluid"
+                        width="19px"
+                        id="addPostBtnId"
+                        height="17px"
+                      />
+                      <p class="ms-2 addPostFont" id="addPostBtnId">Add post</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space"></div>
+
+          <!--  -->
+          
+          <div class="rowPc">
+            <div>
+              <nav class="section">
+                <ul
+                  class="d-flex justify-content-between list-unstyled align-items-center m-0"
+                >
+                  <li>
+                    <a
+                      href="#"
+                      onclick="loadContent('info.html', this, event)"
+                      class="d-flex align-items-center justify-content-center sectionProfile"
+                      data-img="/Auystyr/img/blueInfoProfile.png"
+                      data-color="#FFFFFF"
+                      ><img
+                        src="{% static 'assets/Auystyr/img/infoProfile.png' %}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                      <p class="ms-2">Info</p></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      onclick="loadContent('post.html', this, event)"
+                      class="d-flex align-items-center justify-content-center sectionProfile"
+                      data-img="/Auystyr/img/bluePostProfile.png"
+                      data-color="#FFFFFF"
+                      ><img
+                        src="{% static 'assets/Auystyr/img/postProfile.png' %}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                      <p class="ms-2">Post</p></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      onclick="loadContent('library.html', this, event)"
+                      class="d-flex align-items-center justify-content-center sectionProfile"
+                      data-img="/Auystyr/img/blueLibraryProfile.png"
+                      data-color="#FFFFFF"
+                      ><img
+                        src="{% static 'assets/Auystyr/img/libraryProfile.png' %}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                      <p class="ms-2">Library</p></a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      onclick="loadContent('saved.html', this, event)"
+                      class="d-flex align-items-center justify-content-center sectionProfile"
+                      data-img="/Auystyr/img/savedProfile.png"
+                      data-color="#FFFFFF"
+                      ><img
+                        src="{% static 'assets/Auystyr/img/blackSavedProfile.png' %}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                      <p class="ms-2">Saved</p></a
+                    >
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!-- mobile -->
+          <div class="rowMobile">
+            <div class="col">
+              <nav class="sectionMobile">
+                <ul
+                  class="d-flex justify-content-between list-unstyled align-items-center m-0"
+                >
+                  <li style="border: 1px solid #707070; border-radius: 10px;">
+                    <a
+                      href="#"
+                      onclick="loadContent('info.html', this, event)"
+                      class="d-flex align-items-center justify-content-center sectionProfile"
+                      data-img="/Auystyr/img/blueInfoProfile.png"
+                      data-color="#FFFFFF"
+                      ><img
+                        src="{% static 'assets/Auystyr/img/infoProfile.png' %}"
+                        id="imageProfilePages"
+                        alt=""
+                        class="img-fluid"
+                      />
+                      <p class="ms-2">Info</p></a
+                    >
+                  </li>
+                  <li style="border: 1px solid #707070; border-radius: 10px;">
+                    <a
+                      href="#"
+                      onclick="loadContent('post.html', this, event)"
+                      class="d-flex align-items-center justify-content-center sectionProfile"
+                      data-img="/Auystyr/img/bluePostProfile.png"
+                      data-color="#FFFFFF"
+                      ><img
+                        src="{% static 'assets/Auystyr/img/postProfile.png' %}"
+                        id="imageProfilePages"
+                        alt=""
+                        class="img-fluid"
+                      />
+                      <p class="ms-2">Post</p></a
+                    >
+                  </li>
+                  <li style="border: 1px solid #707070; border-radius: 10px;">
+                    <a
+                      href="#"
+                      onclick="loadContent('library.html', this, event)"
+                      class="d-flex align-items-center justify-content-center sectionProfile"
+                      data-img="/Auystyr/img/blueLibraryProfile.png"
+                      data-color="#FFFFFF"
+                      ><img
+                        src="{% static 'assets/Auystyr/img/libraryProfile.png' %}"
+                        id="imageProfilePages"
+                        alt=""
+                        class="img-fluid"
+                      />
+                      <p class="ms-2">Library</p></a
+                    >
+                  </li>
+                  <li style="border: 1px solid #707070; border-radius: 10px;">
+                    <a
+                      href="#"
+                      onclick="loadContent('saved.html', this, event)"
+                      class="d-flex align-items-center justify-content-center sectionProfile"
+                      data-img="/Auystyr/img/savedProfile.png"
+                      data-color="#FFFFFF"
+                      ><img
+                        src="{% static 'assets/Auystyr/img/blackSavedProfile.png' %}"
+                        id="imageProfilePages"
+                        alt=""
+                        class="img-fluid"
+                      />
+                      <p class="ms-2">Saved</p></a
+                    >
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="space"></div>
+
+          <div class="row">
+            <div class="col">
+              <div class="card border-0 mb-4">
+                <div id="content">
+                  <!-- Здесь будет загружен контент -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'assets/Auystyr/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/Auystyr/profile/profile.js' %}"></script>
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+    </script>
+  </body>
+</html>

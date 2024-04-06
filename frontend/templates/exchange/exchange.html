@@ -1,0 +1,258 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Exchange{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'exchange/css/exchange.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="main_content">
+        <div class="mcontainer">
+            <div class="flex justify-between items-center relative mb-7">
+                <div class="flex-1">
+                    <nav class="responsive-nav border-b md:m-0 -mx-4">
+                        <ul uk-switcher="connect: #exchange-tab; animation: uk-animation-fade">
+                            <li><a href="#" class="lg:px-2 text-xl">Incoming </a></li>
+                            <li><a href="#" class="lg:px-2">Outcoming </a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Sections -->
+            <div class="uk-switcher lg:mt-8 mt-4" id="exchange-tab">
+                <!-- Incoming -->
+                <div>
+                    <!-- Detail Incoming -->
+                    <div id="detail-modal" class="create-post" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
+
+                            <div class="text-center py-4">
+                                <h3 class="text-lg font-semibold"> Details </h3>
+                                <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
+                            </div>
+                            <div class="flex flex-1 items-center justify-between space-x-4 p-5">
+                                <!-- My book -->
+                                <div>
+                                    <div class="contact-list my-2">
+                                        <a href="#">
+                                            <div class="contact-avatar">
+                                                <img id="exchange_my_user_photo" src="" alt="">
+                                            </div>
+                                            <div class="contact-username" id="exchange_my_user_username"></div>
+                                        </a>
+                                    </div>
+                                    <div class="exchange_post_image rounded-2xl mb-2.5" id="exchange_my_post_image"></div>
+                                    <div>
+                                        <h3 class="text-base text-black font-medium mb-2.5" id="exchange_my_post_title"></h3>
+                                        <p class="text-xs" id="exchange_my_post_author"></p>
+                                    </div>
+                                </div>
+
+                                <!--  -->
+
+                                <div style="padding: 0 50px;">
+                                    <img src="{% static 'core/image/exchangeIcon.png' %}" alt="" width="50px">
+                                </div>
+
+                                <!--  -->
+
+                                <!-- Exchange book -->
+                                <div>
+                                    <div class="contact-list my-2">
+                                        <a href="#">
+                                            <div class="contact-avatar">
+                                                <img id="exchange_receiver_user_photo" src="" alt="">
+                                            </div>
+                                            <div class="contact-username" id="exchange_receiver_user_username"></div>
+                                        </a>
+                                    </div>
+
+                                    <div class="exchange_post_image rounded-2xl mb-2.5" id="exchange_receiver_post_image"></div>
+
+                                    <div>
+                                        <h3 class="text-base text-black font-medium mb-2.5" id="exchange_receiver_post_title"></h3>
+                                        <p class="text-xs" id="exchange_receiver_post_author"></p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Information -->
+                            <div class="bottom-0 p-4 w-full">
+
+                                <div class="flex justify-between items-center mb-5">
+                                    <h3 class="text-base">Current status: </h3>
+                                    <div class="border-0 items-center justify-center flex requestStatusMobile"><p id="exchange_post_status" class=""></p></div>
+                                </div>
+
+                                <div class="flex justify-between">
+                                    <h3 class="text-base">Request date: </h3>
+                                    <p class="text-base" id="exchange_request_date"></p>
+                                </div>
+
+                                <!-- Buttons-->
+                                <div class="flex float-right py-5" id="change_status_exchange">
+                                    <button value="rejected" class="text-base py-2 px-4 rounded-2xl" href="#" style="background-color: #FF9292; color: #3A0000;">Reject</button>
+                                    <button value="accepted" class="text-base py-2 px-4 rounded-2xl ml-4" href="#" style="background-color: #92FFB1; color: #003A02;">Accept</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for inc in incoming %}
+                        <div class="flex justify-center mb-7">
+                            <div class="requestRow">
+                                <div class="justify-between request">
+                                    <div class="requestDescription flex items-center">
+                                        <div class="bookImage">
+                                          <img
+                                            class="img_requestbooks"
+                                            src="{{ inc.sender_post.image.url }}"
+                                            alt=""
+                                          />
+                                        </div>
+                                        <div class="bookInfo">
+                                          <div class="name_author">
+                                            <h3 class="text-2xl font-bold mb-2">{{ inc.sender_post.title }}</h3>
+                                            <p class="text-xl">{{ inc.sender_post.author }}</p>
+                                          </div>
+                                          <div class="contact-list my-2 ml-1">
+                                              <a href="#">
+                                                  <div class="contact-avatar">
+                                                      <img src="{{ inc.sender.get_photo }}" alt="">
+                                                  </div>
+                                                  <div class="contact-username">{{ inc.sender.username }}</div>
+                                              </a>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <button onclick="changeStatus({{ inc.id }})" type="button" class="border-0 items-center justify-center flex requestStatusMobile" uk-toggle="target: #detail-modal" id="{{ inc.status }}">
+                                        <p>{{ inc.status }}</p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Outcoming -->
+                <div>
+                    {% for out in outgoing %}
+                        <div class="flex justify-center mb-7">
+                            <div class="requestRow">
+                                <div class="justify-between request">
+                                    <div class="requestDescription flex items-center">
+                                        <div class="bookImage">
+                                          <img
+                                            class="img_requestbooks"
+                                            src="{{ out.sender_post.image.url }}"
+                                            alt=""
+                                          />
+                                        </div>
+                                        <div class="bookInfo">
+                                          <div class="name_author">
+                                            <h3 class="text-2xl font-bold mb-2">{{ out.sender_post.title }}</h3>
+                                            <p class="text-xl">{{ out.sender_post.author }}</p>
+                                          </div>
+                                          <div class="contact-list my-2 ml-1">
+                                              <a href="#">
+                                                  <div class="contact-avatar">
+                                                      <img src="{{ out.sender.get_photo }}" alt="">
+                                                  </div>
+                                                  <div class="contact-username">{{ out.sender.username }}</div>
+                                              </a>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <button onclick="changeStatus({{ out.id }})" type="button" class="border-0 items-center justify-center flex requestStatusMobile" uk-toggle="target: #detail-modal" id="{{ inc.status }}">
+                                        <p>{{ out.status }}</p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function changeStatus(request_id) {
+            await getIncomingExchangeInfo(request_id);
+            let statuses = document.querySelectorAll('#change_status_exchange');
+            statuses.forEach(status => {
+                status.addEventListener('click', (e) => {
+                    fetch('/change_status_exchange/' + request_id, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        body: JSON.stringify({
+                            status: e.target.value
+                        })
+                    }).then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+                            if (data.status === 200) {
+                                window.location.reload();
+                            }
+                            else {
+                                alert(data.message);
+                            }
+                        })
+                        .catch(err => console.log(err))
+                })
+            })
+        }
+
+        async function getIncomingExchangeInfo(request_id) {
+            let statuses = document.querySelectorAll('#change_status_exchange');
+            fetch('/get_exchange_info/' + request_id, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            }).then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    const exchangeData = data.data;
+
+                    document.getElementById('exchange_my_user_photo').src = exchangeData.sender_photo;
+                    document.getElementById('exchange_my_user_username').innerText = exchangeData.sender_username;
+                    document.getElementById('exchange_my_post_image').style.backgroundImage = "url(" + exchangeData.sender_post_image + ")";
+                    document.getElementById('exchange_my_post_title').innerText = exchangeData.sender_post_title;
+                    document.getElementById('exchange_my_post_author').innerText = exchangeData.sender_post_author;
+
+                    document.getElementById('exchange_receiver_user_photo').src = exchangeData.receiver_photo;
+                    document.getElementById('exchange_receiver_user_username').innerText = exchangeData.receiver_username;
+                    document.getElementById('exchange_receiver_post_image').style.backgroundImage = "url(" + exchangeData.receiver_post_image + ")";
+                    document.getElementById('exchange_receiver_post_title').innerText = exchangeData.receiver_post_title;
+                    document.getElementById('exchange_receiver_post_author').innerText = exchangeData.receiver_post_author;
+
+                    document.getElementById('exchange_post_status').innerText = exchangeData.current_status;
+                    document.getElementById('exchange_request_date').innerText = exchangeData.request_date;
+
+                    if (exchangeData.current_status == 'rejected' || exchangeData.current_status == 'accepted' || exchangeData.is_outgoing === true) {
+                        statuses.forEach(status => {
+                            status.style.display = 'none';
+                        })
+                    }
+                    else {
+                        statuses.forEach(status => {
+                            status.style.display = 'block';
+                        })
+                    }
+
+                })
+                .catch(err => console.log(err))
+        }
+
+    </script>
+
+{% endblock %}

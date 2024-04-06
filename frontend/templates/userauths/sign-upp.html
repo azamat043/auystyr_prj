@@ -1,0 +1,105 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Auystyr</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" href="images/bookcrossing-apple-touch-icon-new-256.jpg" sizes="256x256" />
+    <link rel="icon" href="images/new_logo.png" sizes="256x256" type="image/png" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="icon" href="images/new_logo.png" type="image/png" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-GLhlTQ8iZS+EKI9qD6YoZx4Y80MYYBGrdQPiWNSdTEUnvgG0N47jKC60OzYbYYVNA" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:700,700i|IBM+Plex+Sans:400,400i,600,600i" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/static-css.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style2.css' %}" />
+
+    <script async="" src="{% static 'assets/js/analytics.js'%}"></script>
+    <script id="facebook-jssdk" src="{% static 'assets/js/sdk.js#xfbml=1&amp;version=v2.8&amp;appId=156952121014078'%}"
+    ></script>
+    <script>
+      if ($.cookie("bc-theme") == "putty") {
+        $("#theme-changer").text("White Theme");
+        $("html").addClass("putty-theme");
+      }
+    </script>
+  </head>
+  <body class="home" style="box-sizing: border-box">
+    
+    <!-- Home:Index-->
+    <nav
+    id="head-nav"
+    style="display: flex"
+    class="navbar fixed-top navbar-expand-lg"
+  >
+    <a class="navbar-brand" href="/"> </a>
+    <div class="s" id="user-panel">
+      <button
+        class="btn-login"
+        onclick="window.location.href='login.html';"
+        style=" color: white; background-color: #001642"
+      >
+        Log In
+      </button>
+      <button
+        class="btn-signup"
+        onclick="window.location.href='register.html';"
+       color: black; background-color: #d9d9d9"
+      >
+        Sign Up
+      </button>
+    </div>
+  </nav>
+  <div style="display: flex; flex-direction: column;">
+  <section class="container forms">
+    <div class="form login">
+        <div class="form-content">
+          <div class="title_log_reg">
+            <header style="margin-top: 150px; color: #03014C;">Create Account</header>
+        
+            <form action="#">
+                <div class="field input-field">
+                    <input type="email" placeholder="Enter email" class="input">
+                </div>
+                <div class="field input-field">
+                    <input type="text" placeholder="Enter first&last name" class="input">
+                </div>
+                <div class="field input-field">
+                    <input type="text" placeholder="Enter nick name" class="input">
+                </div>
+                <div class="field input-field">
+                    <input type="password" placeholder="Password" class="password">
+                    <i class='bx bx-hide eye-icon'></i>
+                </div>
+                <div class="field button-field">
+                    <button style="background-color: #5381F8;">Continue</button>
+                </div>
+            </form>
+            <div class="dontHaveAccount">
+              <span>Do you already have an account? <a href="login.html" >Sign in</a></span>
+          </div>
+          </div>
+        </div>
+        
+    </div>
+   
+    
+</section>
+
+<!-- <iframe src="{% static 'social_links.html' %}" frameborder="0" scrolling="no" width="100%" height="100px" style="margin-top: 320px;"></iframe> -->
+
+<!-- <p style="width: 100%;font-size: 15px; text-align: center; color: #7D7D7D;">© 2023 — 2024 Auystyr Corporation</p> -->
+
+</div>
+
+<script src="{% static 'assets/js/login.js' %}"></script>
+
+  </body>
+</html>

@@ -1,0 +1,82 @@
+/* Event */
+.eventContent{}
+.event{
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+.main_content{
+  max-width: 850px;
+}
+.eventImg{
+    width: 250px;
+    height: 195px;
+}
+.eventDescript{
+    padding: 30px 0px;
+    margin-left: 10px;
+}
+.eventInnerMain{
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #DBDBDB;
+    border-radius: 15px;
+}
+.eventInnerContent{
+    margin: 30px 0px;
+}
+.eventInnerImageOrganizator img{
+    width: 72px;
+    height: 72px;
+    border-radius: 100px;
+}
+.bookNow{
+    width: 200px;
+    height: 100px;
+    border-radius: 15px;
+    background-color: #59B4C3;
+}
+.bookNow h2{
+    background-color: #003EFF;
+    border-radius: 15px;
+    color: white;
+
+}
+
+/* Calendar */
+.calendarArea{
+    margin-top: 30px;
+}
+.calendar-container {
+    width: 440px;
+    height: 377px;
+
+    border-radius: 5px;
+    display: block;
+    justify-content: center;
+  }
+  .month {
+    text-align: center;
+    font-size: 20px;
+    padding: 10px 0;
+  }
+  .table th,
+  .table td {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: center;
+  }
+  thead th {
+    background-color: #f2f2f2;
+  }
+  tbody td {
+    cursor: pointer;
+  }
+  tbody td:hover {
+    background-color: #f9f9f9;
+  }
+
+.learnMore img{
+    margin-left: 80px;
+    margin-bottom: 100px;
+}
