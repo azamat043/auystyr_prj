@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  auystyr_web:
+  auystyrweb:
     build:
       context: ../..
       dockerfile: docker/dev/Dockerfile-dev
-    container_name: auystyr_web
+    container_name: auystyrweb
     restart: always
     env_file:
       - envs/.env_web_dev
@@ -18,16 +18,16 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      auystyr_db:
+      auystyrdb:
         condition: service_healthy
     command: sh -c "/entrypoint.sh"
 
-  auystyr_db:
+  auystyrdb:
     build:
       context: ../..
       dockerfile: docker/dev/Dockerfile-db-dev
-    image: postgres:15.2-alpine
-    container_name: auystyr_db
+    image: postgres:16-alpine
+    container_name: auystyrdb
     restart: always
     env_file:
       - envs/.env_db_dev
@@ -36,10 +36,10 @@ services:
     healthcheck:
       test: ["CMD", "pg_isready", "-q"]
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - data_postgres_data:/var/lib/postgresql/data
       - ./init:/docker-entrypoint-initdb.d
 
 volumes:
-  postgres_data:
+  data_postgres_data:
   static:
   media:
