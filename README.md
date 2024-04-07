@@ -23,7 +23,6 @@ Auystyr is a pioneering online bookcrossing social platform specifically designe
 ### Performance Benefits
 
 - **Event Features**: Provides timely news and descriptions for university-related book events, including an efficient payment system for paid events.
-- **Integration with Kaspi**: Allows traditional payment methods for event participation.
 
 ### Unexpected Benefits
 
@@ -40,18 +39,13 @@ The front-end is developed with standard web technologies including HTML, CSS, a
 
 - **Core**: Python, Django/REST Framework
 - **Database**: PostgreSQL, Django-postgrespool 2.0
-- **Server**: Deployed on an Apache server, with a Node.js front-end server proxied by Apache
 
-### Integrations
-
-- **Google Books API**: Automatically searches for and fetches book information based on the specified language.
 
 ## Deployment
 
 The application is deployed on OVHCloud and Netlify, showcasing the responsiveness and compatibility across all major browsers and devices.
 
-- [Visit the deployed website on OVHCloud](#)
-- [Visit the deployed website on Netlify](#)
+- [Click here to visit the deployed website ](#https://auystyr.kz)
 
 ## Getting Started
 
