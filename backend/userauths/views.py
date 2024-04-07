@@ -46,6 +46,7 @@ def RegisterView(request):
     return render(request, template_name, context)
 
 
+@csrf_exempt
 def LoginView(request):
     if request.user.is_authenticated:
         messages.warning(request, "You are already registered!")
@@ -74,13 +75,10 @@ def LoginView(request):
     return HttpResponseRedirect("/")
 
 
-
 def LogoutView(request):
     logout(request)
     messages.success(request, "You are logged in!")
     return redirect("userauths:sign-up")
-
-
 
 
 @login_required

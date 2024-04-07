@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Favicon -->
-    <link href="assets/images/favicon.png" rel="icon" type="image/png">
+    <link href="{% static 'assets/images/favicon.png' %}" rel="icon" type="image/png">
 
     <!-- Basic Page Needs
         ================================================== -->
-    <title>Auystyr</title>
+    <title>{% block title %} {% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Socialite is - Professional A unique and beautiful collection of UI elements">
@@ -25,7 +25,7 @@
     <!-- CSS
     ================================================== -->
     <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
@@ -35,174 +35,218 @@
 
 <body>
 
+    <!-- Header -->
+    <header>
 
+      <div class="header_wrap">
+        <div class="header_inner mcontainer">
+          <span id="onClickMenuMobile" onclick="openNav()">&#9776;</span>
 
-        <!-- Header -->
-        <header>
-            <div class="header_wrap">
-                <div class="header_inner mcontainer">
-                    <div class="left_side">
+          <script>
+            function openNav() {
+              document.getElementById("mySidenav").style.width = "280px";
+            }
 
-                        <span class="slide_menu" uk-toggle="target: #wrapper ; cls: is-collapse is-active">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M3 4h18v2H3V4zm0 7h12v2H3v-2zm0 7h18v2H3v-2z" fill="currentColor"></path></svg>
-                        </span>
+            function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+            }
+          </script>
+          <div class="left_side">
 
-                        <div id="logo">
-                            <a href="{% url 'core:feed' %}">
-                                <img src="{% static 'assets/images/new-logo.png' %}" alt="">
-                                <img src="{% static 'assets/images/new-logo.png' %}" class="logo_mobile" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- search icon for mobile -->
-                    <div class="header-search-icon" uk-toggle="target: #wrapper ; cls: show-searchbox"> </div>
-                    <div class="header_search"><i class="uil-search-alt"></i>
-                        <input value="" type="text" class="form-control" placeholder="Search for Friends , Videos and more.." autocomplete="off">
-                        <div uk-drop="mode: click" class="header_search_dropdown">
-
-
-
-                        </div>
-                    </div>
-
-                    <div class="right_side">
-
-                        <div class="header_widgets">
-
-
-                            <a href="{% url 'userauths:my-profile'%}">
-                                <img src="{{request.user.profile.image.url}}" class="is_avatar" alt="">
-                            </a>
-                            <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
-
-                                <a href="{% url 'userauths:my-profile'%}" class="user">
-                                    <div class="user_avatar">
-                                        <img src="{{request.user.profile.image.url}}" alt="">
-                                    </div>
-                                    <div class="user_name">
-                                        <div> {{request.user.profile.full_name}} </div>
-                                        <span> @{{request.user.username}}</span>
-                                    </div>
-                                </a>
-                                <hr>
-
-                                <hr>
-                                <a href="{% url 'userauths:my-profile'%}">
-                                    <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
-                                    My Account
-                                </a>
-
-
-                                <a href="#" id="night-mode" class="btn-night-mode">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                                      </svg>
-                                     Night mode
-                                    <span class="btn-night-mode-switch">
-                                        <span class="uk-switch-button"></span>
-                                    </span>
-                                </a>
-                                <a href="{% url 'userauths:sign-out' %}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                                    </svg>
-                                    Log Out
-                                </a>
-
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
+            <div id="logo">
+              <a href="{% url 'core:feed' %}">
+                <img src="{% static 'assets/images/logo-auystyr.png' %}" alt="" />
+                <img
+                  src="{% static 'assets/images/logo-auystyr-mobile.png' %}"
+                  class="logo_mobile"
+                  alt=""
+                />
+              </a>
             </div>
-        </header>
+          </div>
+        <div class="header_search"><i class="uil-search-alt"></i>
+            <input value="" type="text" class="form-control" placeholder="Search for Friends , Videos and more.." autocomplete="off">
+            <div uk-drop="mode: click" class="header_search_dropdown">
 
-
-        <!-- sidebar -->
-        <div class="sidebar">
-
-            <div class="sidebar_inner" data-simplebar>
-
+                <h4 class="search_title"> Recently </h4>
                 <ul>
-                    <li class="active"><a href="{% url 'core:feed' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-blue-600">
-                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                        </svg>
-                        <span> Main </span> </a>
-                    </li>
-                    <li><a href="{% url 'exchange' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-yellow-500">
-                          <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span> Exchange </span> </a>
-                    </li>
-                    <li id="more-veiw" hidden><a href="forums.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-blue-500">
-                            <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
-                            <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
-                        </svg>
-                       <span> Message </span> </a>
-                    </li>
-
-                    <li id="more-veiw" hidden><a href="{% url 'events' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-yellow-500">
-                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-                          </svg><span>  Events </span></a>
-                    </li>
-                    <li><a href="games.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-green-500">
-                            <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
-                        </svg>  <span>  Quiz </span></a>
-                    </li>
-
-
-
-
-                </ul>
-
-                <a href="#" class="see-mover h-10 flex my-1 pl-2 rounded-xl text-gray-600" uk-toggle="target: #more-veiw; animation: uk-animation-fade">
-                    <span class="w-full flex items-center" id="more-veiw">
-                        <svg class="  bg-gray-100 mr-2 p-0.5 rounded-full text-lg w-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        See More
-                    </span>
-                    <span class="w-full flex items-center" id="more-veiw" hidden>
-                        <svg  class="bg-gray-100 mr-2 p-0.5 rounded-full text-lg w-7"  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
-                        See Less
-                    </span>
-                </a>
-
-
-
-
-                <ul class="side_links" data-sub-title="Pages">
                     <li>
                         <a href="#">
-                            <ion-icon name="albums-outline" class="side-icon"></ion-icon> <span> About us  </span> </a>
-                        <ul>
-                            <li><a href="pages-about.html"> About </a></li>
-                            <li><a href="pages-contact.html"> Contact us </a></li>
-                            <li><a href="pages-privacy.html"> Privacy </a></li>
-                        </ul>
+                            <img src="assets/images/avatars/avatar-1.jpg" alt="" class="list-avatar">
+                            <div class="list-name">  Erica Jones </div>
+                        </a>
                     </li>
                     <li>
-                        <a href="feed.html">
-                            <ion-icon name="settings-outline" class="side-icon"></ion-icon> <span> Setting  </span> </a>
-                        <ul>
-                            <li><a href="pages-setting.html">layout 1</a></li>
-                            <li><a href="pages-setting2.html">layout 2</a></li>
-                        </ul>
+                        <a href="#">
+                            <img src="assets/images/avatars/avatar-2.jpg" alt="" class="list-avatar">
+                            <div class="list-name">  Coffee  Addicts </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="assets/images/avatars/avatar-3.jpg" alt="" class="list-avatar">
+                            <div class="list-name"> Mountain Riders </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="assets/images/avatars/avatar-4.jpg" alt="" class="list-avatar">
+                            <div class="list-name"> Property Rent And Sale  </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="assets/images/avatars/avatar-5.jpg" alt="" class="list-avatar">
+                            <div class="list-name">  Erica Jones </div>
+                        </a>
                     </li>
                 </ul>
 
             </div>
-
-            <!-- sidebar overly for mobile -->
-            <div class="side_overly" uk-toggle="target: #wrapper ; cls: is-collapse is-active"></div>
-
         </div>
+
+
+          <div class="right_side">
+            <div class="header_widgets">
+              <a href="#">
+                <img
+                  src="{% static 'assets/images/avatars/ImageRuslan.png' %}"
+                  class="is_avatar"
+                  alt=""
+                />
+              </a>
+              <div
+                uk-drop="mode: click;offset:5"
+                class="header_dropdown profile_dropdown"
+              >
+                <a href="timeline.html" class="user">
+                  <div class="user_avatar">
+                    <img src="assets/images/avatars/ImageRuslan.png" alt="" />
+                  </div>
+                  <div class="user_name">
+                    <div>{{ user.full_name }}</div>
+                    <span>@{{ user.username }}</span>
+                  </div>
+                </a>
+                <hr />
+                <a href="#" id="night-mode" class="btn-night-mode">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                    />
+                  </svg>
+                  Night mode
+                  <span class="btn-night-mode-switch">
+                    <span class="uk-switch-button"></span>
+                  </span>
+                </a>
+                <a href="{% url 'userauths:sign-out' %}">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                    ></path>
+                  </svg>
+                  Log Out
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- sidebar -->
+    <div class="sidebar sidebar_main_style">
+      <div class="sidebar_inner" data-simplebar>
+        <ul>
+          <li class="active">
+            <a href="{% url 'core:feed' %}">
+              <img
+                class="ic_left_bar"
+                src="{% static 'assets/images/main_ic.png' %}"
+                alt=""
+              />
+              <span> Main </span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'exchange' %}">
+              <img
+                class="ic_left_bar"
+                src="{% static 'assets/images/exchange.png' %}"
+                alt=""
+              />
+              <span> Exchange </span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <img
+              class="ic_left_bar"
+              style="padding: 3px;"
+                src="{% static 'assets/images/messages_ic.png' %}"
+                alt=""
+              />
+              <span> Message</span></a
+            >
+          </li>
+          <li>
+            <a href="">
+                <img
+                class="ic_left_bar"
+                src="{% static 'assets/images/events_ic.png' %}"
+                alt=""
+              />
+              <span> Events </span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+                <img
+                class="ic_left_bar"
+                src="{% static 'assets/images/quiz_ic.png' %}"
+                alt=""
+              />
+              <span> Quiz </span>
+            </a>
+          </li>
+          <ul class="side_links">
+            <li>
+              <a href="">
+                  <img
+                  class="ic_left_bar"
+                  src="{% static 'assets/images/about_ic.png' %}"
+                  alt=""
+                />
+                <span> About us </span>
+              </a>
+            </li>
+
+            <li>
+              <a href="">
+                  <img
+                  class="ic_left_bar"
+                  src="{% static 'assets/images/settings_ic.png' %}"
+                  alt=""
+                />
+                <span> Settings </span>
+              </a>
+            </li>
+        </ul>
+      </div>
+    </div>
 
         {% block content %}
 

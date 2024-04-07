@@ -1,0 +1,263 @@
+/* Import font
+----------------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+/* ---------------------------------- */
+
+/* Exchange */
+.exchange {
+  border-radius: 15px;
+  background-color: #dbdbdb;
+}
+.requestRow {
+  width: 850px;
+}
+.bookInfo {
+  margin-left: 30px;
+}
+.name_author {
+  margin-bottom: 66px;
+}
+.request {
+  display: flex;
+  padding: 30px 50px;
+  border-radius: 15px;
+  background-color: #ececec;
+}
+.book_status {
+  display: flex;
+}
+/* .requestContent{
+    margin-bottom: 30px;
+} */
+.hidden {
+  display: none;
+}
+#pending {
+  background-color: #d6eaf6;
+}
+#active {
+  background-color: #d6f6df;
+}
+#rejected {
+  background-color: #f6d6d6;
+}
+#ended {
+  background-color: #d2d2d2;
+}
+
+/* Modal part */
+.requestDetailUserName p {
+  font-size: 15px;
+  font-family: Inter;
+  margin-left: 10px;
+  color: black;
+}
+.requestImage {
+  border-radius: 15px;
+}
+.incRequestUser > div {
+  margin-bottom: 10px;
+}
+.requestDetailBookTitle {
+  font-family: Inter;
+  font-size: 15px;
+  color: black;
+}
+.requestDeatailCancel {
+  padding: 10px 12px;
+  border-radius: 15px;
+  background-color: #ff9292;
+}
+.requestDeatailAccept {
+  padding: 10px 12px;
+  border-radius: 15px;
+  background-color: #92ffb1;
+}
+.img_requestbooks {
+  width: auto;
+  height: auto;
+  border-radius: 15px;
+}
+.requestStatusMobile {
+  width: 100px;
+  height: 40px;
+  border-radius: 15px;
+}
+.requestStatusWeb {
+  width: 100px;
+  height: 40px;
+  border-radius: 15px;
+}
+#iconDivDetails {
+  display: flex;
+}
+.iconDivDetailsTop {
+  display: none;
+}
+.requestStatusMobile{
+  display: none;
+}
+.bookInfoExchange {
+  margin-left: 30px;
+}
+
+@media (max-width: 431px) {
+  .exchange {
+    border-radius: 15px;
+    background-color: transparent;
+  }
+  .buttonInner {
+    padding: 6px 8px;
+    border-radius: 15px;
+    background-color: #9d9d9d;
+  }
+  .bookInfoExchange {
+    margin-left: 20px;
+    padding: 20px 20px 20px 0;
+    align-content: center;
+  }
+  .request {
+    display: block;
+    width: 400px;
+    height: 220px;
+    padding: 0px 0px;
+    border-radius: 15px;
+    background-color: #ececec;
+  }
+  .book_status {
+    display: block;
+  }
+  .bookImage {
+    width: 180px;
+    height: 220px;
+  }
+  .requestRow {
+    width: 400px;
+  }
+  /* .requestContent{
+        margin-bottom: 50px;
+    } */
+  .name_author {
+    margin-bottom: 5px;
+  }
+  .img_requestbooks {
+    width: 180px;
+    height: 220px;
+    border-radius: 15px;
+  }
+  #filterButtons {
+    margin-top: 20px;
+  }
+  .requestStatusWeb{
+    display: none;
+  }
+  .requestStatusMobile {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    margin-left: 90px;
+    width: 100px;
+    height: 40px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .requestStatusMobile p {
+    font-size: 15px;
+    font-family: Inter;
+    color: black;
+  }
+  .bookInfo {
+    margin-top: 10px;
+    /* padding: 10px; */
+    align-content: center;
+    margin-left: 20px;
+  }
+  .requestImage {
+    width: 150px;
+    height: 190px;
+    border-radius: 15px;
+  }
+
+  #iconDivDetails {
+    display: none;
+  }
+  .iconDivDetailsTop {
+    display: flex;
+  }
+  #exampleModalLabel {
+    display: none;
+  }
+}
+/* SideNav TopNavigation */
+/* header menu mobile version */
+@media (min-width: 431px) {
+  .sidenav {
+    display: none;
+  }
+  #onClickMenuMobile {
+    display: none;
+  }
+}
+@media (max-width: 431px) {
+  .sidenav {
+    display: flex;
+  }
+  #menu_profile {
+    margin-left: 20px;
+  }
+  #onClickMenuMobile {
+    display: flex;
+    size: 30px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 30px;
+    width: 25%;
+    justify-content: center;
+  }
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  bottom: 30px;
+  right: 0px;
+  left: 0;
+  font-family: "Ubuntu";
+  font-weight: 400;
+  font-size: 24px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}

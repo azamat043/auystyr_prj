@@ -1,0 +1,83 @@
+/* Event */
+.eventContent {
+  max-width: 850px;
+}
+.event {
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+.eventImage {
+  width: 100%;
+  height: 275px;
+  margin-bottom: 50px;
+}
+.eventCard img {
+  border-radius: 15px 15px 0px 0px;
+}
+@media (max-width: 431px) {
+  .eventImage {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  .evntMedium {
+    margin-bottom: 20px;
+  }
+  .evntMedium h1 {
+    margin-bottom: 0px;
+  }
+  .eventCard {
+    max-width: 200px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-right: 10px;
+  }
+  .grid.md\:grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.eventDescript {
+  padding: 30px 0px;
+  margin-left: 10px;
+}
+@media(min-width:768px){
+  .evntMedium {
+    margin-bottom: 50px;
+  }
+  .eventCard {
+    max-width: 270px;
+    border: 1px solid black;
+    border-radius: 15px;
+  }
+}
+.evntMedium h1 {
+  margin-bottom: 30px;
+}
+.eventPart h1 {
+  margin-bottom: 30px;
+}
+.eventText {
+  padding: 20px 15px;
+}
+
+
+/* Event Inner */
+
+.eventInnerImage img {
+  width: 100%;
+  height: 300px;
+  border-radius: 15px 15px 0px 0px;
+}
+.eventInnerMain {
+  padding: 40px 20px;
+  background-color: #dbdbdb;
+  border-radius: 0px 0px 15px 15px;
+}
+.eventTitle {
+  padding: 40px 0px 40px 0px;
+}
+
+.eventInnerContent {
+  margin-bottom: 30px;
+}

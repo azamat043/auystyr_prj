@@ -1,0 +1,63 @@
+.editButtons {
+  /* margin-left: 230px; */
+  padding-bottom: 30px;
+}
+.mcontainer {
+  max-width: 850px;
+}
+
+.editButtons button {
+  background-color: #eeeeee;
+  border-radius: 10px;
+  width: 160px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.editInfoArea {
+  padding: 30px 0px;
+  background-color: #eeeeee;
+  border-radius: 15px;
+}
+
+.editForm {
+  width: 790px;
+}
+.editForm input {
+  border-radius: 15px;
+}
+.editChangePass {
+  width: 700px;
+  padding: 50px 0px;
+}
+.editChangePass input {
+  border: 1px solid #0085ff;
+  border-radius: 15px;
+}
+.editChangePass input:focus {
+  border: 1px solid #0085ff;
+}
+.editHelpDesk li {
+  padding: 30px 20px;
+  background-color: #d9d9d9;
+  border-radius: 15px;
+}
+#settings-section {
+  margin-top: 1rem;
+}
+@media (max-width: 431px) {
+  #settings-section {
+    margin-top: 30px;
+  }
+  .inputSettings {
+    width: 300px;
+  }
+  .infoSectionSettings {
+    justify-content: center;
+  }
+  .editChangePass {
+    width: auto;
+    padding: 20px 0px;
+  }
+}

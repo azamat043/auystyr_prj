@@ -1,0 +1,88 @@
+.infoSection {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  background-color: #ffffff;
+  border: 1px solid #ebe9e6;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+.main_content {
+  max-width: 850px;
+}
+.bottom_post_profile {
+  width: 100%;
+  margin-top: 20px;
+  display:flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-left: 100px;
+  /* align-self: flex-end; */
+}
+.row.align-items-center {
+    display: flex;
+    justify-content: space-between; /* Для создания пространства между элементами */
+  }
+  
+.userInformation {
+  width: 720px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+.userInformation .infoArea {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 13px 30px;
+}
+.userInformation .infoArea img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.userInformation .infoAreaDel {
+  width: 345px;
+}
+
+@media(max-width:431px){
+  .userInformation {
+    width: 300px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+  }
+  .userInformation .infoArea {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 13px 30px;
+  }
+  .userInformation .infoArea img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  .userInformation .infoAreaDel {
+    width: 140px;
+  }
+}
+
+/* Modal create post */
+.createPostImage {
+  width: 240px;
+  height: 400px;
+  background-color: #d9d9d9;
+  border-radius: 15px;
+}
+
+.createPostModal input {
+  border: 1px solid black;
+  padding: 0;
+  width: 200px;
+  height: 40px;
+  margin-bottom: 15px;
+}
+.createPostModal input:focus {
+  border: 1px solid black;
+}
+.createPostModalTextarea textarea {
+  border: 1px solid black;
+  border-radius: 10px;
+}

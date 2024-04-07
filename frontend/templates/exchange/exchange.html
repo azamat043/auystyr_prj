@@ -4,7 +4,11 @@
 {% block title %}Exchange{% endblock %}
 
 {% block links %}
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main_register.css' %}">
     <link rel="stylesheet" href="{% static 'exchange/css/exchange.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -14,7 +18,7 @@
             <div class="flex justify-between items-center relative mb-7">
                 <div class="flex-1">
                     <nav class="responsive-nav border-b md:m-0 -mx-4">
-                        <ul uk-switcher="connect: #exchange-tab; animation: uk-animation-fade">
+                        <ul uk-switcher="connect: #exchange-tab; animation: uk-animation-fade" class="overflow-hidden">
                             <li><a href="#" class="lg:px-2 text-xl">Incoming </a></li>
                             <li><a href="#" class="lg:px-2">Outcoming </a></li>
                         </ul>
@@ -104,16 +108,15 @@
                     </div>
 
                     {% for inc in incoming %}
-                        <div class="flex justify-center mb-7">
+                        <div class="flex mb-7">
                             <div class="requestRow">
                                 <div class="justify-between request">
-                                    <div class="requestDescription flex items-center">
+                                    <div class="requestDescription flex">
                                         <div class="bookImage">
-                                          <img
-                                            class="img_requestbooks"
-                                            src="{{ inc.sender_post.image.url }}"
-                                            alt=""
-                                          />
+                                            <div class="exchange_post_image"
+                                                 style="background-image: url('{{ inc.sender_post.image.url }}')"
+                                            >
+                                            </div>
                                         </div>
                                         <div class="bookInfo">
                                           <div class="name_author">
@@ -147,11 +150,10 @@
                                 <div class="justify-between request">
                                     <div class="requestDescription flex items-center">
                                         <div class="bookImage">
-                                          <img
-                                            class="img_requestbooks"
-                                            src="{{ out.sender_post.image.url }}"
-                                            alt=""
-                                          />
+                                            <div class="exchange_post_image"
+                                                 style="background-image: url('{{ out.sender_post.image.url }}')"
+                                            >
+                                            </div>
                                         </div>
                                         <div class="bookInfo">
                                           <div class="name_author">
@@ -168,7 +170,7 @@
                                           </div>
                                         </div>
                                     </div>
-                                    <button onclick="changeStatus({{ out.id }})" type="button" class="border-0 items-center justify-center flex requestStatusMobile" uk-toggle="target: #detail-modal" id="{{ inc.status }}">
+                                    <button onclick="changeStatus({{ out.id }})" type="button" class="border-0 items-center justify-center flex requestStatusMobile" uk-toggle="target: #detail-modal" id="{{ out.status }}">
                                         <p>{{ out.status }}</p>
                                     </button>
                                 </div>
@@ -179,6 +181,7 @@
             </div>
         </div>
     </div>
+
 
     <script>
         async function changeStatus(request_id) {

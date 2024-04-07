@@ -1,0 +1,525 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: white;
+  z-index: 100;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+}
+body {
+  background-color: rgb(255, 255, 255);
+}
+.main_content {
+  max-width: 850px;
+}
+.logo-im {
+  width: 140px;
+  height: 40px;
+}
+
+.input {
+  margin-left: 115px;
+  width: 300px;
+  height: 40px;
+  margin-right: 20px;
+  border: none;
+  background-color: rgb(238, 238, 238);
+  border-radius: 10px;
+  padding-left: 10px;
+  font-size: 15px;
+}
+.input::placeholder {
+  color: #4d5157;
+}
+.ava {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.left-head {
+  display: flex;
+  justify-content: end;
+  width: 23%;
+}
+.center-head {
+  display: flex;
+  flex-direction: row;
+  width: 55%;
+  align-items: center;
+}
+.name_users {
+  font-size: 24px;
+  font-weight: 900;
+}
+.right-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.together-right {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  width: 100px;
+  align-items: center;
+}
+p {
+  margin: 0;
+}
+.text {
+  font-size: 14px;
+}
+.info {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.arrow {
+  width: 10px;
+  height: 20px;
+}
+.wi {
+  width: 350px;
+  border-radius: 14px;
+  z-index: 100;
+}
+/* 
+rgb(237,238, 240) */
+
+.dropdown-im {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.left-side {
+  margin-top: 110px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+}
+.left-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 15px;
+}
+.both {
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 5px;
+  width: 180px;
+  align-items: center;
+  height: 50px;
+  margin-bottom: 6px;
+}
+.both:hover {
+  background-color: rgb(188, 188, 188);
+  border-radius: 14px;
+}
+.left-text {
+  margin-left: 20px;
+}
+.gray-line {
+  border-width: 0.5px;
+  border-bottom-style: solid;
+  border-color: rgb(186, 186, 186);
+  height: 4px;
+  margin-bottom: 10px;
+}
+
+.bb {
+  border-width: 0.5px;
+  border-bottom-style: solid;
+  border-color: rgb(186, 186, 186);
+  height: 45px;
+}
+.left {
+  margin-left: 300px;
+  margin-right: -200px;
+  background-color: white;
+}
+
+.About {
+  max-width: 850px;
+  /* height: 2400px; */
+  /* margin: 0px auto; */
+  margin-bottom: 50px;
+  padding: 50px;
+  color: black;
+  background-color: #eeeeee;
+  border-radius: 15px;
+}
+.classP1 {
+  margin: -70px 0px 0px 450px;
+  font-size: 20px;
+  text-align: center;
+  color: #000000;
+}
+.hr {
+  margin: 40px 0;
+}
+
+.mission {
+  text-align: center;
+  font-size: 35px;
+  color: #000000;
+  font-weight: normal;
+  font-family: Inter;
+}
+.breathe {
+  padding-top: 20px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 20px;
+  color: #000000;
+  font-weight: normal;
+  font-family: Inter;
+  width: 60%;
+}
+
+.feature-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+}
+
+.money_about,
+.time,
+.people {
+  width: 200px;
+  height: 300px;
+  background: #a0b9fa;
+  border-radius: 15px;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.img1,
+.img2,
+.img3 {
+  display: block;
+  margin: 10px auto;
+  width: 40%;
+  max-width: 100%;
+  border: 1px black;
+}
+
+.savemoney,
+.savetime,
+.meettime {
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: bold;
+  color: #eeeeee;
+}
+
+.moneytext,
+.timetext,
+.meetext {
+  text-align: center;
+  text-shadow: white;
+  font-size: 12px;
+  width: 80%;
+  color: #eeeeee;
+  margin: 0 auto;
+}
+
+.ourteam {
+  text-align: center;
+  margin: 50px 0px;
+  font-size: 40px;
+}
+
+.darkhan {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 50px -50px; /* Increase margin by 50px on both sides */
+}
+
+.imgg {
+  order: 1; /* Move the image to the end of the flex container */
+  margin-left: 20px; /* Add margin to the left to create some space */
+  width: calc(180px + 30px); /* Increase the width by 30px */
+}
+
+.text {
+  text-align: center;
+  width: 50%; /* Adjust width to make both containers equal */
+}
+
+.h2dd {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.h4dd {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.p1dd,
+.p1er,
+.p1rus,
+.p1aza,
+.p1nur {
+  font-size: 16px;
+  margin-top: 20px;
+}
+.erasyl {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.darkhan,
+.russ,
+.azzamat,
+.nursultan {
+  margin: 100px 0px 0px 0px; /* Increase margin by 50px on both sides */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.er {
+  border-radius: 50%;
+  margin: 0px;
+  border: 1px solid #000000;
+  box-shadow: 5px 10px 10px 5px black;
+  width: 180px;
+  height: 180px;
+}
+
+.text,
+.text1,
+.text2,
+.text3,
+.text4 {
+  text-align: center;
+  width: 50%;
+}
+
+.h2er,
+.h2dd,
+.h2rus,
+.h2nur {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.h4er,
+.h4dd,
+.h4rus,
+.h4nur {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.p2dd {
+  font-weight: 500;
+  margin-left: 0;
+  font-size: 17px;
+  margin-right: -300px;
+}
+.p2er {
+  font-weight: 500;
+  margin-left: 0;
+  font-size: 17px;
+  margin-right: -230px;
+}
+
+.top-word1,
+.top-word2,
+.top-word5,
+.top-word3,
+.top-word4 {
+  margin-bottom: 25px;
+}
+
+/* --------------------- */
+
+.p2rus {
+  font-weight: 500;
+  margin-left: 0;
+  font-size: 17px;
+  margin-right: -230px;
+}
+
+/* ------------------ */
+
+.imgg4 {
+  order: 1; /* Move the image to the end of the flex container */
+  margin-left: 20px; /* Add margin to the left to create some space */
+}
+
+.text3 {
+  text-align: center;
+  width: 50%; /* Adjust width to make both containers equal */
+}
+
+.h2aza {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.h4aza {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.p2aza {
+  font-weight: 500;
+  margin-left: 0;
+  font-size: 17px;
+  margin-right: -300px;
+}
+
+/* --------------- */
+
+.imgnurs,
+.aza,
+.imgrus,
+.dd {
+  border-radius: 50%;
+  margin: 0px;
+  border: 1px solid #000000;
+  box-shadow: 5px 10px 10px 5px black;
+  width: 180px;
+  height: 180px;
+}
+
+.classH1 {
+  font-size: 25px;
+  color: #000000;
+}
+
+@media (max-width: 431px) {
+  .classH1 {
+    font-size: 15px;
+  }
+  .classP1 {
+    margin: -50px 0px 0px 150px;
+    font-size: 12px;
+    text-align: center;
+  }
+  .hr {
+    margin: 20px 0;
+  }
+  .mission {
+    text-align: center;
+    font-size: 20px;
+    color: #000000;
+    font-family: Inter;
+  }
+  .breathe {
+    padding-top: 10px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 12px;
+    color: #000000;
+    font-weight: normal;
+    font-family: Inter;
+    width: 80%;
+  }
+  .moneytext,
+  .timetext,
+  .meetext {
+    display: none;
+  }
+  .money_about,
+  .time,
+  .people {
+    width: 100px;
+    height: 100px;
+    background: #a0b9fa;
+    border-radius: 15px;
+    box-sizing: border-box;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+  }
+  .time {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  .feature-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .savemoney,
+  .savetime,
+  .meettime {
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: bold;
+    color: #eeeeee;
+  }
+  .ourteam {
+    text-align: center;
+    margin: 20px 0px;
+    font-size: 30px;
+  }
+  .imgnurs,
+  .aza,
+  .imgrus,
+  .dd {
+    border-radius: 50%;
+    margin: 0px;
+    border: 1px solid #000000;
+    box-shadow: 5px 10px 10px 5px black;
+    width: 90px;
+    height: 90px;
+  }
+  .er {
+    border-radius: 50%;
+    margin: 0px;
+    border: 1px solid #000000;
+    box-shadow: 5px 10px 10px 5px black;
+    width: 90px;
+    height: 90px;
+  }
+  .h2er,
+  .h2dd,
+  .h2rus,
+  .h2nur {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .h4er,
+  .h4dd,
+  .h4rus,
+  .h4nur {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .p1dd,
+  .p1er,
+  .p1rus,
+  .p1aza,
+  .p1nur {
+    display: none;
+  }
+  .p2er,
+  .p2dd,
+  .p2rus,
+  .p2aza,
+  .p2nur {
+    display: none;
+  }
+  .darkhan,
+  .russ,
+  .azzamat,
+  .nursultan {
+    margin: 50px 0px 0px 0px; /* Increase margin by 50px on both sides */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
