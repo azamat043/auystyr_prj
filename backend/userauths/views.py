@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+
 import core.views
 from core.models import Post
 from userauths.models import Profile, User
@@ -12,6 +14,7 @@ from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
 
 
+@csrf_exempt
 def RegisterView(request):
     if request.user.is_authenticated:
         messages.warning(request, f"Hey {request.user.username}, you are already logged in")
@@ -41,7 +44,6 @@ def RegisterView(request):
     template_name = "userauths/sign-up.html"
 
     return render(request, template_name, context)
-
 
 
 def LoginView(request):
