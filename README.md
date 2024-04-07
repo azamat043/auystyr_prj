@@ -1,7 +1,7 @@
 
 
-![Logo](https://github.com/azamat043/auystyr_prj/blob/main/frontend/static/assets/images/logo-auystyr.png) # - Online Book Exchange Platform
-
+# Auystyr - Online Book Exchange Platform
+![Logo](https://github.com/azamat043/auystyr_prj/blob/main/frontend/static/assets/images/logo-auystyr.png)
 
 ## Overview
 
