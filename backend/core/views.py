@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 import shortuuid
 from rest_framework.views import APIView
 
+from auystyr_prj import settings
 from core.models import Post, Comment, BookExchangeRequest
 from django.utils.text import slugify
 from django.http import JsonResponse
@@ -173,15 +174,23 @@ def send_exchange_request(request):
 def get_exchange_info(request, exchange_id):
     exchange = BookExchangeRequest.objects.get(id=exchange_id)
 
+    default_image_url = 'static/assets/images/post/img-1.jpg'
+
+    def get_image_url(post):
+        try:
+            return post.image.url
+        except ValueError:
+            return default_image_url
+
     data = {
         "sender_username": exchange.sender.username,
         "sender_photo": exchange.sender.get_photo(),
-        "sender_post_image": exchange.sender_post.image.url,
+        "sender_post_image": get_image_url(exchange.sender_post),
         "sender_post_title": exchange.sender_post.title,
         "sender_post_author": exchange.sender_post.author,
         "receiver_username": exchange.receiver.username,
         "receiver_photo": exchange.receiver.get_photo(),
-        "receiver_post_image": exchange.receiver_post.image.url,
+        "receiver_post_image": get_image_url(exchange.receiver_post),
         "receiver_post_title": exchange.receiver_post.title,
         "receiver_post_author": exchange.receiver_post.author,
         "current_status": exchange.status,

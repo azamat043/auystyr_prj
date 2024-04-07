@@ -9348,6 +9348,7 @@ body.story-active header .header_widgets {
 .create-post .uk-modal-dialog {
   position: relative;
   width: 500px;
+  height: 90vh;
   padding: 0px;
   border-radius: 0.5rem;
 }
@@ -9359,7 +9360,7 @@ body.story-active header .header_widgets {
 }
 
 .create-post .create-post-modal-body {
-  height: 500px;
+  height: 300px;
   padding: 1.25rem;
   overflow-x: hidden;
   margin-right: 0.25rem;
@@ -9394,6 +9395,14 @@ body.story-active header .header_widgets {
     rgba(0, 0, 0, 0.04) 0px 13px 10px -5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 13px 10px -5px;
+}
+
+.image_logo_create_post {
+  width: 210px;
+  height: 110px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .create-post.is-story {

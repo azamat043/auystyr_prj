@@ -30,6 +30,7 @@ urlpatterns = [
     re_path('test_token', views.test_token),
     path('exchange', include('exchange.urls')),
     path('events/', include('events.urls')),
+    path('quiz/', include('quiz.urls'))
 ]
 
 if settings.DEBUG:

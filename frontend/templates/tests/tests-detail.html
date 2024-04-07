@@ -1,0 +1,38 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %} Quiz {{ test.title }} {% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main_register.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/css/tests-detail.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Main Contents -->
+    <div class="main_content">
+        <div class="mcontainer">
+
+            <section>
+                <div class="wrapper">
+                    <div class="section_container">
+                        <div class="image_block_background_test_data">
+                            <div class="image_block_test_data" style="background-image: url('{{ test.image.url }}')"></div>
+                        </div>
+                        <div class="main_info_block_test_data">
+                            <h1>{{ test.title }}</h1>
+                            <p>{{ test.description }}</p>
+                            <a href="{% url 'quiz' test.id %}">Pass the test</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+{% endblock %}

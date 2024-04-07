@@ -1,0 +1,112 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Event {{ event.title }}{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main_register.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/event.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Main Contents -->
+    <div class="main_content">
+        <div class="mcontainer">
+
+            <!--  breadcrumb -->
+            <div class="breadcrumb-area py-0">
+                <div class="breadcrumb">
+                    <ul class="m-0">
+                        <li>
+                            <a href="{% url 'events' %}">Events</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">Create New Event </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <!-- create page-->
+            <div class="max-w-2xl m-auto shadow-md rounded-md bg-white lg:mt-20">
+
+                <!-- form header -->
+                <div class="text-center border-b border-gray-100 py-6">
+                    <h3 class="font-bold text-xl"> Create New Event </h3>
+                </div>
+
+                <!-- form body -->
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="p-10 space-y-7">
+                        <h1>{{ error }}</h1>
+                        <div class="line">
+                            <input class="line__input" id="image" name="image" type="file"
+                                   onkeyup="this.setAttribute('value', this.value);" value="" autocomplete="off">
+                        </div>
+
+                        <div class="line">
+                            <input class="line__input" id="title" name="title" type="text"
+                                   onkeyup="this.setAttribute('value', this.value);" value="" autocomplete="off">
+                            <span for="title" class="line__placeholder"> Event Title </span>
+                        </div>
+
+                        <div class="line h-32">
+                        <textarea class="line__input h-32" id="description" name="description" type="text"
+                                  onkeyup="this.setAttribute('value', this.value);" value=""
+                                  autocomplete="off"></textarea>
+                            <span for="description" class="line__placeholder"> Event description </span>
+                        </div>
+
+                        <div class="px-2 space-y-2">
+                            <label for="" class="font-semibold text-base"> Choose Privacy </label>
+                            <div> Anyone can see who's in the event and what they post.</div>
+                            <select id="visibility" name="visibility" class="shadow-none selectpicker with-border">
+                                <option data-icon="uil-bullseye" value="Only me"> Private</option>
+                                <option data-icon="uil-globe" value="Everyone" selected> Public</option>
+                            </select>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between">
+                            <div style="display: flex; flex-direction: column; width: 40%;">
+                                <h1>Date day</h1>
+                                <div class="line" style="display: flex; width: 100%;">
+                                    <input class="line__input" id="event-date" name="event-date" type="date"
+                                           value="" autocomplete="off" style="width: 100%;">
+                                </div>
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; width: 40%;">
+                                <h1>Date time</h1>
+                                <div class="line" style="display:flex; width: 100%;">
+                                    <input class="line__input" id="event-time" name="event-time" type="time"
+                                           value="" autocomplete="off" style="width: 100%;">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- form footer -->
+                    <div class="flex justify-center border-gray-100 py-8">
+                        <button type="submit" class="button lg:w-1/3">
+                            Create Now
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -21,29 +21,36 @@ def RegisterView(request):
         return redirect('core:feed')
      
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            full_name = form.cleaned_data.get('full_name')
-            phone = form.cleaned_data.get('phone')
+        full_name = request.POST.get('full_name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        gender = request.POST.get('gender')
+        phone = request.POST.get('phone')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
 
-            auth = authenticate(request, email=form.cleaned_data.get('email'), password=form.cleaned_data.get('password1'))
+        if password == confirm_password:
+            user = User.objects.create_user(email=email, password=password, username=username, phone=phone, gender=gender)
+            user.save()
+
+            auth = authenticate(request, email=email, password=confirm_password)
             login(request, auth)
 
             profile = Profile.objects.get(user=request.user)
-            profile.full_name = full_name        
+            profile.full_name = full_name
             profile.phone = phone
-
+            profile.gender = gender
             profile.save()
-            messages.success(request, f'Account Created for {full_name}! You can now login')
 
+            messages.success(request, f'Account Created for {full_name}! You can now login')
             return redirect('core:feed')
-    else:
-        form = UserRegisterForm()
-    context = {'form': form}
+
+        messages.error(request, 'Password does not match')
+        return redirect("userauths:sign-up")
+
     template_name = "userauths/sign-up.html"
 
-    return render(request, template_name, context)
+    return render(request, template_name)
 
 
 @csrf_exempt
@@ -53,8 +60,8 @@ def LoginView(request):
         return redirect("core:feed")
     
     if request.method == "POST":
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+        email = request.POST.get('login_email')
+        password = request.POST.get('login_password')
 
         try:
             user = User.objects.get(email=email)

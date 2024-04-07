@@ -35,271 +35,273 @@
 
 <body>
 
-    <!-- Header -->
-    <header>
+<!-- Header -->
+<header>
 
-      <div class="header_wrap">
+    <div class="header_wrap">
         <div class="header_inner mcontainer">
-          <span id="onClickMenuMobile" onclick="openNav()">&#9776;</span>
+            <span id="onClickMenuMobile" onclick="openNav()">&#9776;</span>
 
-          <script>
-            function openNav() {
-              document.getElementById("mySidenav").style.width = "280px";
-            }
+            <script>
+                function openNav() {
+                    document.getElementById("mySidenav").style.width = "280px";
+                }
 
-            function closeNav() {
-              document.getElementById("mySidenav").style.width = "0";
-            }
-          </script>
-          <div class="left_side">
+                function closeNav() {
+                    document.getElementById("mySidenav").style.width = "0";
+                }
+            </script>
+            <div class="left_side">
 
-            <div id="logo">
-              <a href="{% url 'core:feed' %}">
-                <img src="{% static 'assets/images/logo-auystyr.png' %}" alt="" />
-                <img
-                  src="{% static 'assets/images/logo-auystyr-mobile.png' %}"
-                  class="logo_mobile"
-                  alt=""
-                />
-              </a>
+                <div id="logo">
+                    <a href="{% url 'core:feed' %}">
+                        <img src="{% static 'assets/images/logo-auystyr.png' %}" alt=""/>
+                        <img
+                                src="{% static 'assets/images/logo-auystyr-mobile.png' %}"
+                                class="logo_mobile"
+                                alt=""
+                        />
+                    </a>
+                </div>
             </div>
-          </div>
-        <div class="header_search"><i class="uil-search-alt"></i>
-            <input value="" type="text" class="form-control" placeholder="Search for Friends , Videos and more.." autocomplete="off">
-            <div uk-drop="mode: click" class="header_search_dropdown">
+            <div class="header_search"><i class="uil-search-alt"></i>
+                <input value="" type="text" class="form-control" placeholder="Search for Friends , Videos and more.."
+                       autocomplete="off">
+                <div uk-drop="mode: click" class="header_search_dropdown">
 
-                <h4 class="search_title"> Recently </h4>
-                <ul>
-                    <li>
-                        <a href="#">
-                            <img src="assets/images/avatars/avatar-1.jpg" alt="" class="list-avatar">
-                            <div class="list-name">  Erica Jones </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="assets/images/avatars/avatar-2.jpg" alt="" class="list-avatar">
-                            <div class="list-name">  Coffee  Addicts </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="assets/images/avatars/avatar-3.jpg" alt="" class="list-avatar">
-                            <div class="list-name"> Mountain Riders </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="assets/images/avatars/avatar-4.jpg" alt="" class="list-avatar">
-                            <div class="list-name"> Property Rent And Sale  </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="assets/images/avatars/avatar-5.jpg" alt="" class="list-avatar">
-                            <div class="list-name">  Erica Jones </div>
-                        </a>
-                    </li>
-                </ul>
+                    <h4 class="search_title"> Recently </h4>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <img src="assets/images/avatars/avatar-1.jpg" alt="" class="list-avatar">
+                                <div class="list-name"> Erica Jones</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="assets/images/avatars/avatar-2.jpg" alt="" class="list-avatar">
+                                <div class="list-name"> Coffee Addicts</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="assets/images/avatars/avatar-3.jpg" alt="" class="list-avatar">
+                                <div class="list-name"> Mountain Riders</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="assets/images/avatars/avatar-4.jpg" alt="" class="list-avatar">
+                                <div class="list-name"> Property Rent And Sale</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="assets/images/avatars/avatar-5.jpg" alt="" class="list-avatar">
+                                <div class="list-name"> Erica Jones</div>
+                            </a>
+                        </li>
+                    </ul>
 
+                </div>
             </div>
-        </div>
 
 
-          <div class="right_side">
-            <div class="header_widgets">
-              <a href="#">
-                <img
-                  src="{% static 'assets/images/avatars/ImageRuslan.png' %}"
-                  class="is_avatar"
-                  alt=""
-                />
-              </a>
-              <div
-                uk-drop="mode: click;offset:5"
-                class="header_dropdown profile_dropdown"
-              >
-                <a href="timeline.html" class="user">
-                  <div class="user_avatar">
-                    <img src="assets/images/avatars/ImageRuslan.png" alt="" />
-                  </div>
-                  <div class="user_name">
-                    <div>{{ user.full_name }}</div>
-                    <span>@{{ user.username }}</span>
-                  </div>
-                </a>
-                <hr />
-                <a href="#" id="night-mode" class="btn-night-mode">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
-                    />
-                  </svg>
-                  Night mode
-                  <span class="btn-night-mode-switch">
+            <div class="right_side">
+                <div class="header_widgets">
+                    <a href="#">
+                        <img
+                                src="{{ user.profile.image.url }}"
+                                class="is_avatar"
+                                alt=""
+                        />
+                    </a>
+                    <div
+                            uk-drop="mode: click;offset:5"
+                            class="header_dropdown profile_dropdown"
+                    >
+                        <a href="timeline.html" class="user">
+                            <div class="user_avatar">
+                                <img src="{{ user.profile.image.url }}" alt=""/>
+                            </div>
+                            <div class="user_name">
+                                <div>{{ user.full_name }}</div>
+                                <span>@{{ user.username }}</span>
+                            </div>
+                        </a>
+                        <hr/>
+                        <a href="#" id="night-mode" class="btn-night-mode">
+                            <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                            >
+                                <path
+                                        d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                                />
+                            </svg>
+                            Night mode
+                            <span class="btn-night-mode-switch">
                     <span class="uk-switch-button"></span>
                   </span>
-                </a>
-                <a href="{% url 'userauths:sign-out' %}">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                    ></path>
-                  </svg>
-                  Log Out
-                </a>
-              </div>
+                        </a>
+                        <a href="{% url 'userauths:sign-out' %}">
+                            <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                            >
+                                <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                ></path>
+                            </svg>
+                            Log Out
+                        </a>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </header>
-
-    <!-- sidebar -->
-    <div class="sidebar sidebar_main_style">
-      <div class="sidebar_inner" data-simplebar>
-        <ul>
-          <li class="active">
-            <a href="{% url 'core:feed' %}">
-              <img
-                class="ic_left_bar"
-                src="{% static 'assets/images/main_ic.png' %}"
-                alt=""
-              />
-              <span> Main </span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'exchange' %}">
-              <img
-                class="ic_left_bar"
-                src="{% static 'assets/images/exchange.png' %}"
-                alt=""
-              />
-              <span> Exchange </span>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <img
-              class="ic_left_bar"
-              style="padding: 3px;"
-                src="{% static 'assets/images/messages_ic.png' %}"
-                alt=""
-              />
-              <span> Message</span></a
-            >
-          </li>
-          <li>
-            <a href="">
-                <img
-                class="ic_left_bar"
-                src="{% static 'assets/images/events_ic.png' %}"
-                alt=""
-              />
-              <span> Events </span>
-            </a>
-          </li>
-          <li>
-            <a href="">
-                <img
-                class="ic_left_bar"
-                src="{% static 'assets/images/quiz_ic.png' %}"
-                alt=""
-              />
-              <span> Quiz </span>
-            </a>
-          </li>
-          <ul class="side_links">
-            <li>
-              <a href="">
-                  <img
-                  class="ic_left_bar"
-                  src="{% static 'assets/images/about_ic.png' %}"
-                  alt=""
-                />
-                <span> About us </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="">
-                  <img
-                  class="ic_left_bar"
-                  src="{% static 'assets/images/settings_ic.png' %}"
-                  alt=""
-                />
-                <span> Settings </span>
-              </a>
-            </li>
-        </ul>
-      </div>
     </div>
+</header>
 
-        {% block content %}
+<!-- sidebar -->
+<div class="sidebar sidebar_main_style">
+    <div class="sidebar_inner" data-simplebar>
+        <ul>
+            <li class="active">
+                <a href="{% url 'core:feed' %}">
+                    <img
+                            class="ic_left_bar"
+                            src="{% static 'assets/images/main_ic.png' %}"
+                            alt=""
+                    />
+                    <span> Main </span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'exchange' %}">
+                    <img
+                            class="ic_left_bar"
+                            src="{% static 'assets/images/exchange.png' %}"
+                            alt=""
+                    />
+                    <span> Exchange </span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <img
+                            class="ic_left_bar"
+                            style="padding: 3px;"
+                            src="{% static 'assets/images/messages_ic.png' %}"
+                            alt=""
+                    />
+                    <span> Message</span></a
+                >
+            </li>
+            <li>
+                <a href="{% url 'events' %}">
+                    <img
+                            class="ic_left_bar"
+                            src="{% static 'assets/images/events_ic.png' %}"
+                            alt=""
+                    />
+                    <span> Events </span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'tests' %}">
+                    <img
+                            class="ic_left_bar"
+                            src="{% static 'assets/images/quiz_ic.png' %}"
+                            alt=""
+                    />
+                    <span> Quiz </span>
+                </a>
+            </li>
+            <ul class="side_links">
+                <li>
+                    <a href="">
+                        <img
+                                class="ic_left_bar"
+                                src="{% static 'assets/images/about_ic.png' %}"
+                                alt=""
+                        />
+                        <span> About us </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <img
+                                class="ic_left_bar"
+                                src="{% static 'assets/images/settings_ic.png' %}"
+                                alt=""
+                        />
+                        <span> Settings </span>
+                    </a>
+                </li>
+            </ul>
+    </div>
+</div>
+
+{% block content %}
 
 
-        {% endblock content %}
+{% endblock content %}
 
 
-                <!-- For Night mode -->
-            <script>
-                (function(window, document, undefined) {
-                    'use strict';
-                    if (!('localStorage' in window)) return;
-                    var nightMode = localStorage.getItem('gmtNightMode');
-                    if (nightMode) {
-                        document.documentElement.className += ' night-mode';
-                    }
-                })(window, document);
+<!-- For Night mode -->
+<script>
+    (function (window, document, undefined) {
+        'use strict';
+        if (!('localStorage' in window)) return;
+        var nightMode = localStorage.getItem('gmtNightMode');
+        if (nightMode) {
+            document.documentElement.className += ' night-mode';
+        }
+    })(window, document);
 
-                (function(window, document, undefined) {
+    (function (window, document, undefined) {
 
-                    'use strict';
+        'use strict';
 
-                    // Feature test
-                    if (!('localStorage' in window)) return;
+        // Feature test
+        if (!('localStorage' in window)) return;
 
-                    // Get our newly insert toggle
-                    var nightMode = document.querySelector('#night-mode');
-                    if (!nightMode) return;
+        // Get our newly insert toggle
+        var nightMode = document.querySelector('#night-mode');
+        if (!nightMode) return;
 
-                    // When clicked, toggle night mode on or off
-                    nightMode.addEventListener('click', function(event) {
-                        event.preventDefault();
-                        document.documentElement.classList.toggle('dark');
-                        if (document.documentElement.classList.contains('dark')) {
-                            localStorage.setItem('gmtNightMode', true);
-                            return;
-                        }
-                        localStorage.removeItem('gmtNightMode');
-                    }, false);
+        // When clicked, toggle night mode on or off
+        nightMode.addEventListener('click', function (event) {
+            event.preventDefault();
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('gmtNightMode', true);
+                return;
+            }
+            localStorage.removeItem('gmtNightMode');
+        }, false);
 
-                })(window, document);
-            </script>
+    })(window, document);
+</script>
 
-            <!-- Javascript
-            ================================================== -->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-            <script src="{% static 'assets/js/tippy.all.min.js' %}"></script>
-            <script src="{% static 'assets/js/uikit.js' %}"></script>
-            <script src="{% static 'assets/js/simplebar.js' %}"></script>
-            <script src="{% static 'assets/js/custom.js' %}"></script>
-            <script src="{% static 'assets/js/function.js' %}"></script>
-            <script src="{% static 'assets/js/bootstrap-select.min.js' %}"></script>
-            <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+<!-- Javascript
+================================================== -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="{% static 'assets/js/tippy.all.min.js' %}"></script>
+<script src="{% static 'assets/js/uikit.js' %}"></script>
+<script src="{% static 'assets/js/simplebar.js' %}"></script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+<script src="{% static 'assets/js/function.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap-select.min.js' %}"></script>
+<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 
 
 </body>

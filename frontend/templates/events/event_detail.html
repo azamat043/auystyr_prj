@@ -4,125 +4,87 @@
 {% block title %}Event {{ event.title }}{% endblock %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'events/css/events.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main_register.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/event.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 
     <!-- Main Contents -->
-    <div class="main_content" style="margin-left: 300px;">
-            <div class="mcontainer">
-
-                <div class="relative" uk-slider="finite: true">
-
-                    <div class="uk-slider-container px-1 py-3">
-                        <ul class="uk-slider-items">
-                            <li>
-                                <div class="card">
-                                    <img src="/assets/images/category/event-carousel.png" alt="">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <img src="/assets/images/category/event-carousel-2.png" alt="">
-                                </div>
-                            </li>
-                            <li>
-
-                            </li>
-                        </ul>
-
-                    <a class="absolute bg-white bottom-1/2 flex items-center justify-center p-2 -left-4 rounded-full shadow-md text-xl w-9 z-10 dark:bg-gray-800 dark:text-white" href="#" uk-slider-item="previous"> <i class="icon-feather-chevron-left"></i></a>
-                    <a class="absolute bg-white bottom-1/2 flex items-center justify-center p-2 -right-4 rounded-full shadow-md text-xl w-9 z-10 dark:bg-gray-800 dark:text-white" href="#" uk-slider-item="next"> <i class="icon-feather-chevron-right"></i></a>
-
-                </div>
-            </div>
-
-            <div class="flex items-center calendarArea">
-                <div class="">
-                    <h1 class="text-4xl font-bold mb-7">EVENTS YOU'LL REMEMBER!</h1>
-                    <p class="text-base">We are passionate about creating integrated experiences that bring cohesive connection between authors and book lovers. Our team of experienced and talented event managers strive to deliver stellar results.</p>
-                </div>
-                <div class="cal">
-                    <div class="calendar-container  d-block items-center">
-                        <div class="month">March 2024</div>
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th>Sun</th>
-                              <th>Mon</th>
-                              <th>Tue</th>
-                              <th>Wed</th>
-                              <th>Thu</th>
-                              <th>Fri</th>
-                              <th>Sat</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td>1</td>
-                              <td>2</td>
-                              <td>3</td>
-                            </tr>
-                            <tr>
-                              <td>4</td>
-                              <td>5</td>
-                              <td>6</td>
-                              <td>7</td>
-                              <td>8</td>
-                              <td>9</td>
-                              <td>10</td>
-                            </tr>
-                              <td>11</td>
-                              <td>12</td>
-                              <td>13</td>
-                              <td>14</td>
-                              <td>15</td>
-                              <td>16</td>
-                              <td>17</td>
-                            </tr>
-                              <td>18</td>
-                              <td>19</td>
-                              <td>20</td>
-                              <td>21</td>
-                              <td>22</td>
-                              <td>23</td>
-                              <td>24</td>
-                            </tr>
-                              <td>25</td>
-                              <td>26</td>
-                              <td>27</td>
-                              <td>28</td>
-                              <td>29</td>
-                              <td>30</td>
-                              <td>31</td>
-                          </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    <div class="main_content">
+        <div class="mcontainer">
 
             <div class="eventContent">
-                <div class="flex event">
-                    <div class="flex-shrink-0 rounded-md relative eventImg">
-                        <img src="{{ event.image.url }}" class="absolute w-full h-full inset-0 rounded-md object-cover shadow-sm" alt="">
+
+                <div class="">
+                    <div class="eventInnerImage">
+                        <img src="{{ event.image.url }}" alt="">
                     </div>
-                    <div class="flex-1 pb-3 space-y-5 eventDescript">
-                        <h3 class="text-2xl">{{ event.title }}</h3>
-                        <p class="flex space-x-2 items-center text-sm">{{ event.date }}</p>
-                        <div class="flex items-center">
-                            <img src="{{ event.user.get_photo }}" class="w-6 rounded-full -mr-2" alt="">
+
+                    <div class="eventInnerMain">
+
+                        <div class="flex eventInnerContent">
+                            <h1 class="text-3xl font-bold">{{ event.title }}</h1>
                         </div>
+
+                        <div class="flex items-center justify-between eventInnerContent">
+                            <div class="flex items-center ">
+                                <div class="eventInnerImageOrganizator">
+                                    <div class="image_organizator_event"
+                                         style="background-image: url('{{ event.user.profile.image.url }}')"
+                                    >
+                                    </div>
+                                </div>
+                                <div class="ml-2">
+                                    <h3 class="text-xl">SDU life Events</h3>
+                                    <p class="text-lg">Organize Team</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="eventInnerContent">
+                            <p class="text-xl">{{ event.description }}</p>
+                        </div>
+
+                        <div class="flex items-center justify-between eventInnerContent">
+                            <div class="flex">
+                                <div class="pr-2">
+                                    <img src="{% static 'assets/images/icons/eventDate.png' %}" alt="">
+                                </div>
+                                <div class="space-y-2">
+                                    <h3>Date and time</h3>
+                                    <p>{{ event.date }}</p>
+                                </div>
+                            </div>
+
+                            <div class="flex">
+                                <div class="pr-2">
+                                    <img src="assets/images/icons/eventLocation.png" alt="">
+                                </div>
+                                <div class="space-y-2">
+                                    <h3>Location</h3>
+                                    <p>Library, SDU, Kaskelen</p>
+                                </div>
+                            </div>
+
+                            <div class="bookNow py-4 px-5 space-y-2.5 rounded-xl" style="background-color: #59B4C3;">
+                                <h1 class="flex justify-center text-base">From KZT 2000.00</h1>
+                                <a href="">
+                                    <h2 class="flex justify-center py-3 px-7 text-base rounded-xl text-white"
+                                        style="background-color: #003EFF;">Book Now</h2>
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="learnMore" >
-                        <img src="{% static 'assets/images/category/save.png' %}" alt="" class="" style="padding: 5px;">
-                    </div>
+
                 </div>
+
             </div>
+
         </div>
     </div>
 

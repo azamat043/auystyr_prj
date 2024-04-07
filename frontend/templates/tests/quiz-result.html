@@ -1,0 +1,52 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %} Quiz Result {% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main_register.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/css/tests-detail.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Main Contents -->
+    <div class="main_content">
+        <div class="mcontainer">
+
+            <section>
+                <div class="wrapper">
+                    <div class="section_container">
+                        <div class="image_block_background_test_data">
+                            <div class="image_block_test_data"
+                                 style="background-image: url('{{ quiz_result.test.image.url }}')"></div>
+                        </div>
+                        <div class="main_info_block_test_data">
+                            <h1>Your result</h1>
+                            <p>{{ quiz_result_text }}</p>
+                        </div>
+
+                        {% for message in messages %}
+                            <div class="successfully_test_completed_block">
+                                <h1>{{ message }}</h1>
+                                <span id="ok">Ok</span>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('ok').addEventListener('click', () => {
+            document.querySelector('.successfully_test_completed_block').style.display = 'none';
+        })
+    </script>
+
+{% endblock %}

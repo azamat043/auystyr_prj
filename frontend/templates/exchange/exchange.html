@@ -5,7 +5,6 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/main_register.css' %}">
     <link rel="stylesheet" href="{% static 'exchange/css/exchange.css' %}">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
@@ -19,8 +18,14 @@
                 <div class="flex-1">
                     <nav class="responsive-nav border-b md:m-0 -mx-4">
                         <ul uk-switcher="connect: #exchange-tab; animation: uk-animation-fade" class="overflow-hidden">
-                            <li><a href="#" class="lg:px-2 text-xl">Incoming </a></li>
-                            <li><a href="#" class="lg:px-2">Outcoming </a></li>
+                            <li class="exchange_title_count_block">
+                                <a href="#" class="lg:px-2 text-xl">Incoming </a>
+                                <span>{% if incoming %}{{ incoming.count }}{% else %}0{% endif %}</span>
+                            </li>
+                            <li class="exchange_title_count_block">
+                                <a href="#" class="lg:px-2">Outcoming</a>
+                                <span style="margin-left: 90px;">{% if outgoing %}{{ outgoing.count }}{% else %}0{% endif %}</span>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -38,7 +43,7 @@
                                 <h3 class="text-lg font-semibold"> Details </h3>
                                 <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
                             </div>
-                            <div class="flex flex-1 items-center justify-between space-x-4 p-5">
+                            <div class="flex flex-1 items-center justify-between space-x-4" style="padding: 0 20px 10px 20px;">
                                 <!-- My book -->
                                 <div>
                                     <div class="contact-list my-2">

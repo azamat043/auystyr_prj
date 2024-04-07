@@ -42,6 +42,7 @@ class NotificationAdmin(admin.ModelAdmin):
 class EventPostTabAdmin(admin.TabularInline):
     model = EventPost
 
+
 class EventAdmin(admin.ModelAdmin):
     # inlines = [GroupPostTabAdmin]
     list_editable = ['user', 'title', 'visibility']

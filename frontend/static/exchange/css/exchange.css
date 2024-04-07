@@ -181,3 +181,19 @@
     background-repeat: no-repeat;
     border-radius: 15px;
 }
+
+.exchange_title_count_block span {
+    margin: -50px 0 0 75px;
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 2px 5px;
+    color: white;
+    font-size: 12px;
+}
