@@ -1,6 +1,10 @@
+Given the update that no specific framework is used in the front-end of your project, let's adjust the README.md template accordingly to better match your project's actual technical stack and setup. Here's the revised version without references to Vue.js, Nuxt.js, or any associated libraries and plugins.
 
+---
 
 # Auystyr - Online Book Exchange Platform
+![Logo](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME/blob/main/assets/logo.png?raw=true)
+
 
 ## Overview
 
@@ -49,7 +53,8 @@ The front-end is developed with standard web technologies including HTML, CSS, a
 
 The application is deployed on OVHCloud and Netlify, showcasing the responsiveness and compatibility across all major browsers and devices.
 
-- [Visit the deployed website by this link](#https://auystyr.kz)
+- [Visit the deployed website on OVHCloud](#)
+- [Visit the deployed website on Netlify](#)
 
 ## Getting Started
 
@@ -85,5 +90,6 @@ The application is deployed on OVHCloud and Netlify, showcasing the responsivene
 
 Given the simplicity of the front-end, the development process mainly involves editing HTML, CSS, and JavaScript files directly. For seeing your changes, simply open the HTML files in a web browser. For a more advanced setup, consider using a live server plugin available in most code editors, such as Visual Studio Code, to automatically reload the browser on file changes.
 
+---
 
-
+This revised README.md reflects the absence of a specific front-end framework in your project while maintaining a clear and structured presentation of your project's details, goals, and setup instructions.
