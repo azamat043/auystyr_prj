@@ -49,7 +49,7 @@ The front-end is developed with standard web technologies including HTML, CSS, a
 
 The application is deployed on OVHCloud and Netlify, showcasing the responsiveness and compatibility across all major browsers and devices.
 
-- Visit the deployed website by this [link](#https://auystyr.kz)
+- [Visit the deployed website by this link](#https://auystyr.kz)
 
 ## Getting Started
 
