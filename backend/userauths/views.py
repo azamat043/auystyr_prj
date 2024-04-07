@@ -24,6 +24,9 @@ def RegisterView(request):
             full_name = form.cleaned_data.get('full_name')
             phone = form.cleaned_data.get('phone')
 
+            auth = authenticate(request, email=form.cleaned_data.get('email'), password=form.cleaned_data.get('password1'))
+            login(request, auth)
+
             profile = Profile.objects.get(user=request.user)
             profile.full_name = full_name        
             profile.phone = phone
