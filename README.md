@@ -1,9 +1,7 @@
-Given the update that no specific framework is used in the front-end of your project, let's adjust the README.md template accordingly to better match your project's actual technical stack and setup. Here's the revised version without references to Vue.js, Nuxt.js, or any associated libraries and plugins.
 
----
 
 # Auystyr - Online Book Exchange Platform
-![Logo](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME/blob/main/assets/logo.png?raw=true)
+![Logo](https://github.com/azamat043/auystyr_prj/blob/main/frontend/static/assets/images/logo-auystyr.png)
 
 
 ## Overview
