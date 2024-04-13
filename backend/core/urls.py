@@ -9,6 +9,7 @@ urlpatterns = [
     path("save_post/", views.save_post, name="save_post"), 
     path("comment_post/", views.comment_on_post, name="comment_post"),
     path("like_comment/", views.like_comment, name="like_comment"),
+    path("search_post", views.search_post, name="search_post"),
 
     path("get_post_info/<int:pk>", views.get_post_info, name="exchange_request"),
     path("send_exchange_request", views.send_exchange_request, name="send_exchange_request"),

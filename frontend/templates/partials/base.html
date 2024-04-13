@@ -65,42 +65,10 @@
                 </div>
             </div>
             <div class="header_search"><i class="uil-search-alt"></i>
-                <input value="" type="text" class="form-control" placeholder="Search for Friends , Videos and more.."
-                       autocomplete="off">
+                <input value="" type="text" id="search_query" name="search_query" class="form-control" placeholder="Search for Friends , Videos and more.."
+                       autocomplete="off" oninput="searchPost(this.value)">
                 <div uk-drop="mode: click" class="header_search_dropdown">
-
-                    <h4 class="search_title"> Recently </h4>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <img src="assets/images/avatars/avatar-1.jpg" alt="" class="list-avatar">
-                                <div class="list-name"> Erica Jones</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="assets/images/avatars/avatar-2.jpg" alt="" class="list-avatar">
-                                <div class="list-name"> Coffee Addicts</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="assets/images/avatars/avatar-3.jpg" alt="" class="list-avatar">
-                                <div class="list-name"> Mountain Riders</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="assets/images/avatars/avatar-4.jpg" alt="" class="list-avatar">
-                                <div class="list-name"> Property Rent And Sale</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="assets/images/avatars/avatar-5.jpg" alt="" class="list-avatar">
-                                <div class="list-name"> Erica Jones</div>
-                            </a>
-                        </li>
+                    <ul id="find_post_list">
                     </ul>
 
                 </div>
@@ -193,15 +161,15 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{% url 'chat' %}">
                     <img
                             class="ic_left_bar"
                             style="padding: 3px;"
                             src="{% static 'assets/images/messages_ic.png' %}"
                             alt=""
                     />
-                    <span> Message</span></a
-                >
+                    <span> Message</span>
+                </a>
             </li>
             <li>
                 <a href="{% url 'events' %}">
@@ -293,6 +261,38 @@
 
 <!-- Javascript
 ================================================== -->
+<script>
+    let find_post_list = document.getElementById('find_post_list');
+
+    function searchPost(value) {
+        let trimmedValue = value.trim();
+
+        if (trimmedValue.length > 0) {
+            fetch(`/search_post?query=${encodeURIComponent(trimmedValue)}`)
+                .then(response => response.json())
+                .then(data => {
+                    data = data.data;
+                    find_post_list.innerHTML = '';
+                    data.forEach(post => {
+                        find_post_list.innerHTML += `
+                            <li>
+                                <a href="#">
+                                    <img src="${post.image}" alt="" class="list-avatar">
+                                    <div class="list-name">${post.title}</div>
+                                </a>
+                            </li>
+                        `
+                    })
+                })
+        } else {
+            find_post_list.innerHTML = `
+                <h1 style="font-size: 14px; padding: 5px;">No post found</h1>
+            `;
+        }
+    }
+
+</script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="{% static 'assets/js/tippy.all.min.js' %}"></script>

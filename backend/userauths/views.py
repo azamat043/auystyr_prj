@@ -82,6 +82,7 @@ def LoginView(request):
     return HttpResponseRedirect("/")
 
 
+@csrf_exempt
 def LogoutView(request):
     logout(request)
     messages.success(request, "You are logged in!")

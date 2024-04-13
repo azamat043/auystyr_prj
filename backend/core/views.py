@@ -32,13 +32,13 @@ def index(request):
 @csrf_exempt
 def create_post(request):
     if request.method == "POST":
-        title = request.POST.get("post-caption")
+        title = request.POST.get("title")
+        author = request.POST.get("author")
+        description = request.POST.get("description")
+        genre = request.POST.get("genre")
+        publication_year = request.POST.get("publication_year")
+        image = request.FILES.get("image")
         visibility = request.POST.get("visibility")
-        image = request.FILES.get("post-thumbnail")
-
-        print("title ===============", title)
-        print("visibility ==========", visibility)
-        print("image ===============", image)
 
         uuid_key = shortuuid.uuid()
         uniqueid = uuid_key[:4]
@@ -47,25 +47,19 @@ def create_post(request):
             post = Post(
                 title=title,
                 image=image,
+                author=author,
+                description=description,
+                genre=genre,
+                publication_year=publication_year,
                 visibility=visibility,
                 user=request.user,
                 slug=slugify(title) + "-" + str(uniqueid.lower())
             )
 
             post.save()
-
-            return JsonResponse({"post" : {
-                "title":post.title,
-                "image":post.image.url,
-                "full_name":post.user.profile.full_name,
-                "profile_image":post.user.profile.image.url,
-                "date": timesince(post.date),
-                "id": post.id
-            }})
-        else:
-            return JsonResponse({"error": "Image or title does not exists"})
-
-    return JsonResponse({"data": "sent"})
+            return redirect("/")
+        return redirect("/")
+    return redirect("/")
 
 
 def save_post(request):
@@ -152,6 +146,7 @@ def get_post_info(request, pk):
     return JsonResponse({"data": data})
 
 
+@csrf_exempt
 def send_exchange_request(request):
     if request.method == "POST":
         data = json.loads(request.body)
@@ -205,6 +200,7 @@ def get_exchange_info(request, exchange_id):
     return JsonResponse({"data": data})
 
 
+@csrf_exempt
 def change_status_exchange(request, exchange_id):
     if request.method == "POST":
         exchange = BookExchangeRequest.objects.get(id=exchange_id)
@@ -220,3 +216,19 @@ def change_status_exchange(request, exchange_id):
         return JsonResponse({"data": "Status changed!", "status": 200})
     else:
         return JsonResponse({"message": "No data", "status": 400})
+
+
+def search_post(request):
+    query = request.GET.get("query")
+
+    posts = Post.objects.filter(title__icontains=query, active=True, visibility="Everyone")
+    data = []
+
+    for post in posts:
+        data.append({
+            "id": post.id,
+            "title": post.title,
+            "image": post.image.url,
+        })
+
+    return JsonResponse({"data": data})
