@@ -1,0 +1,185 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}About us{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main_register.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/about.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Main Contents -->
+    <div class="main_content">
+        <div class="mcontainer">
+
+            <div class="About" style="width: 100%;">
+                <div class="titles">
+                    <h1 class="classH1">Find. Swap.</h1>
+                    <h1 class="classH1">Read...</h1>
+                    <p class="classP1">
+                        Auystyr is a revolutionary online bookcrossing social website
+                        designed exclusively for the university community (SDU).
+                    </p>
+                </div>
+                <hr class="hr"/>
+                <h1 class="mission">
+                    Our main mission is to connect people through books.
+                </h1>
+                <h3 class="breathe">
+                    Breathe new life into books! Instead of letting your old favorites
+                    gather dust, pass them on to other readers.
+                </h3>
+
+                <div class="feature-container">
+                    <div class="money_about">
+                        <img
+                                class="img1"
+                                src="{% static 'assets/images/about_us/money.png' %}"
+                                alt="Save Money Image"
+                        />
+                        <h2 class="savemoney">Save money</h2>
+                        <p class="moneytext">
+                            Today, books and knowledge are valuable but costly. Save on new
+                            purchases with our book exchange, preserving your savings.
+                        </p>
+                    </div>
+
+                    <div class="time">
+                        <img
+                                class="img2"
+                                src="{% static 'assets/images/about_us/time.png' %}"
+                                alt="Save Time Image"
+                        />
+                        <h2 class="savetime">Save time</h2>
+                        <p class="timetext">
+                            Using our website you can effectively exchange books via chat and
+                            thus you can save your time.
+                        </p>
+                    </div>
+
+                    <div class="people">
+                        <img
+                                class="img3"
+                                src="{% static 'assets/images/about_us/exchange_about.png' %}"
+                                alt="Meet New People Image"
+                        />
+                        <h2 class="meettime">Meet new people</h2>
+                        <p class="meetext">
+                            By exchanging books, you can find new friends or the love of your
+                            life. Life and our website give you hope for a happy life.
+                        </p>
+                    </div>
+                </div>
+
+                <h1 class="ourteam">Our team</h1>
+                <div class="erasyl">
+                    <div class="imgg2">
+                        <img
+                                class="er"
+                                src="{% static 'assets/images/avatars/erasyl_img.png' %}"
+                                alt=""
+                        />
+                    </div>
+                    <div class="text1">
+                        <div class="top-word1">
+                            <h2 class="h2er">Amangeldin Erasyl</h2>
+                            <h4 class="h4er">Project Manager * Leadership</h4>
+                        </div>
+                        <p class="p1er">
+                            In your actions inspire others to dream more, learn more, do more
+                            and become more, you are a leader.
+                        </p>
+                        <p class="p2er">-John Quincy Adams</p>
+                    </div>
+                </div>
+
+                <div class="darkhan">
+                    <div class="imgg4">
+                        <img
+                                class="dd"
+                                src="{% static 'assets/images/avatars/darkhan_img.png' %}"
+                                alt=""
+                        />
+                    </div>
+                    <div class="text">
+                        <div class="top-word2">
+                            <h2 class="h2dd">Shulanbay Darkhan</h2>
+                            <h4 class="h4dd">UX/UI designer</h4>
+                        </div>
+                        <p class="p1dd">
+                            Design is not just what it looks like and feels like. Design is
+                            how it works.
+                        </p>
+                        <p class="p2dd">-Steve Jobs</p>
+                    </div>
+                </div>
+                <div class="russ">
+                    <div class="imgg3">
+                        <img
+                                class="imgrus"
+                                src="{% static 'assets/images/avatars/ImageRuslan.png' %}"
+                                alt=""
+                        />
+                    </div>
+                    <div class="text2">
+                        <div class="top-word4">
+                            <h2 class="h2rus">Adilkhanov Ruslan</h2>
+                            <h4 class="h4rus">Frontend Developer * Vue</h4>
+                        </div>
+                        <p class="p1rus">
+                            Learning to code is useful no matter what your career ambitions
+                            are.
+                        </p>
+                        <p class="p2rus">-Arianna Huffington</p>
+                    </div>
+                </div>
+
+                <div class="azzamat">
+                    <div class="imgg4">
+                        <img
+                                class="aza"
+                                src="{% static 'assets/images/avatars/azamat_img.png' %}"
+                                alt=""
+                        />
+                    </div>
+                    <div class="text3">
+                        <div class="top-word3">
+                            <h2 class="h2aza">Azamat Duisenbekov</h2>
+                            <h4 class="h4aza">Backend Developer * Database</h4>
+                        </div>
+                        <p class="p1aza">
+                            «Работа — это не волк, работа — ворк. А волк — это ходить»;
+                        </p>
+                        <p class="p2aza">-Джейсона стетхема</p>
+                    </div>
+                </div>
+
+                <div class="nursultan">
+                    <div class="imgg5">
+                        <img
+                                class="imgnurs"
+                                src="{% static 'assets/images/avatars/nursultan_img.png' %}"
+                                alt=""
+                        />
+                    </div>
+                    <div class="text4">
+                        <div class="top-word5">
+                            <h2 class="h2nur">Amanzhol Nursultan</h2>
+                            <h4 class="h4nur">Full Stack Developer * Strong</h4>
+                        </div>
+                        <p class="p1nur">
+                            Я живу как карта ляжет, ты живешь как мама скажет.
+                        </p>
+                        <p class="p2nur">-Джейсона стетхема</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

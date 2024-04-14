@@ -88,7 +88,7 @@
                             uk-drop="mode: click;offset:5"
                             class="header_dropdown profile_dropdown"
                     >
-                        <a href="timeline.html" class="user">
+                        <a href="{% url 'userauths:my-profile' %}" class="user">
                             <div class="user_avatar">
                                 <img src="{{ user.profile.image.url }}" alt=""/>
                             </div>
@@ -193,7 +193,7 @@
             </li>
             <ul class="side_links">
                 <li>
-                    <a href="">
+                    <a href="{% url 'core:about_us' %}">
                         <img
                                 class="ic_left_bar"
                                 src="{% static 'assets/images/about_ic.png' %}"
@@ -204,7 +204,7 @@
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="{% url 'userauths:settings' %}">
                         <img
                                 class="ic_left_bar"
                                 src="{% static 'assets/images/settings_ic.png' %}"

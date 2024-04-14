@@ -13,6 +13,10 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 
+def about_us(request):
+    return render(request, "core/about_us.html")
+
+
 @login_required
 def index(request):
     if not request.user.is_authenticated:
@@ -62,6 +66,7 @@ def create_post(request):
     return redirect("/")
 
 
+@csrf_exempt
 def save_post(request):
     id = request.GET['id']
     post = Post.objects.get(id=id)
@@ -84,6 +89,7 @@ def save_post(request):
     return JsonResponse({"data": data})
 
 
+@csrf_exempt
 def comment_on_post(request):
     id = request.GET['id']
     comment = request.GET['comment']
@@ -111,6 +117,7 @@ def comment_on_post(request):
     return JsonResponse({"data":data})
 
 
+@csrf_exempt
 def like_comment(request):
     id = request.GET['id']
     comment = Comment.objects.get(id=id)

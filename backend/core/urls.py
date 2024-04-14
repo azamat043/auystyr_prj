@@ -4,6 +4,8 @@ from core import views
 app_name = "core"
 
 urlpatterns = [
+    path("about-us", views.about_us, name="about_us"),
+
     path("", views.index, name="feed"),
     path("create_post/", views.create_post, name="create_post"),
     path("save_post/", views.save_post, name="save_post"), 

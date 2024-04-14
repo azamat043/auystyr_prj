@@ -60,6 +60,10 @@ class Profile(models.Model):
     status = models.CharField(max_length=100, choices=STATUS, default='active')
     bio = models.TextField(max_length=500, null=True, blank=True)
     about_me = models.TextField(max_length=500, null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
+
+    speciality = models.CharField(max_length=200, null=True, blank=True)
+    course = models.IntegerField(null=True, blank=True)
 
     country = models.CharField(max_length=100, null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)

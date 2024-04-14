@@ -1,0 +1,243 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}About us{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main_register.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/settings.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Main Contents -->
+    <div class="main_content">
+        <div class="mcontainer">
+
+            <div class="flex justify-between items-center relative mb-7">
+                <div class="flex-1">
+                    <nav class="responsive-nav border-b md:m-0 -mx-4">
+                        <ul uk-switcher="connect: #settings-section; animation: uk-animation-fade">
+                            <li><a href="#" class="lg:px-2 text-xl"> Edit Profile </a></li>
+                            <li><a href="#" class="lg:px-2"> Change password </a></li>
+                            <li><a href="#" class="lg:px-2"> Privaty policy </a></li>
+                            <li><a href="#" class="lg:px-2"> Help desk </a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Sections -->
+            <div class="uk-switcher lg:mt-8" id="settings-section">
+                <!-- Edit profile -->
+                <div>
+                    <div class="profile user-profile">
+
+                        <div class="profiles_banner">
+                            <img src="{% static 'assets/images/category/profileBanner.png' %}" alt="">
+                            <div class="absolute bottom-0 right-0  p-3 text-sm z-50 lg:flex">
+                              <a href="#" class="flex items-center justify-center h-8 px-3 rounded-md bg-gray-700 bg-opacity-70 text-white space-x-1.5">
+                                  <ion-icon name="create-outline" class="text-xl"></ion-icon>
+                                  <span> Edit </span>
+                              </a>
+                          </div>
+                        </div>
+
+
+                        <div class="profiles_content">
+
+                            <div class="profile_avatar">
+                                <div class="profile_avatar_holder">
+                                    <img src="{{ user.profile.image.url }}" alt="">
+                                </div>
+                            </div>
+
+                            <div class="profile_info">
+                                <h1 class="text-2xl font-bold"> {{ user.username }} </h1>
+                            </div>
+
+                        </div>
+
+                        <div class="flex justify-center editButtons">
+                            <button class="mr-2.5"><img class="pr-2.5" src="{% static 'assets/images/icons/add.png' %}" alt=""><h1 class="text-base">Upload Image</h1></button>
+                            <button><img class="pr-2.5" src="{% static 'assets/images/icons/delete.png' %}" alt=""><h1 class="text-base">Delete</h1></button>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-center editInfoArea">
+                        <form class="editForm" action="{% url 'userauths:settings' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="grid gap-4 mb-6 md:grid-cols-2 infoSectionSettings">
+                                <div class="inputSettings">
+                                    <label for="first_name" class="mb-2 text-sm font-medium dark:text-white">First
+                                        name</label>
+                                    <input type="text" name="first_name" id="first_name"
+                                           value="{{ user.first_name }}" placeholder="{{ user.first_name }}"
+                                           class="text-sm dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                                           required/>
+                                </div>
+                                <div class="inputSettings">
+                                    <label for="last_name" class="mb-2 text-sm font-medium dark:text-white">Last
+                                        name</label>
+                                    <input type="text" name="last_name" id="last_name" value="{{ user.last_name }}"
+                                           placeholder="{{ user.last_name }}"
+                                           class="text-sm dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                                           required/>
+                                </div>
+                                <div class="inputSettings">
+                                    <label for="nick_name" class="mb-2 text-sm font-medium dark:text-white">Nick
+                                        name</label>
+                                    <input type="text" name="username" id="nick_name" value="{{ user.username }}"
+                                           placeholder="{{ user.username }}"
+                                           class="text-sm dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                                           required/>
+                                </div>
+                                <div class="inputSettings">
+                                    <label for="email"
+                                           class="mb-2 text-sm font-medium dark:text-white">Email</label>
+                                    <input type="email" name="email" id="email" value="{{ user.email }}"
+                                           placeholder="{{ user.email }}"
+                                           class="text-sm dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                                           required/>
+                                </div>
+                            </div>
+
+                            <div class="grid gap-1 mb-6 md:grid-cols-1 infoSectionSettings">
+                                <div class="inputSettings">
+                                    <label for="birthday"
+                                           class="mb-2 text-sm font-medium dark:text-white">Birthday</label>
+                                    <input type="date" name="birthday" id="birthday"
+                                           value="{{ user.profile.birthday|date:'Y-m-d' }}"
+                                           placeholder="{{ user.profile.birthday }}"
+                                           class="text-sm dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white px-5"
+                                           required/>
+                                </div>
+                            </div>
+
+                            <div class="grid gap-4 mb-6 md:grid-cols-2 infoSectionSettings">
+                                <div class="inputSettings">
+                                    <label for="speciality"
+                                           class="mb-2 text-sm font-medium dark:text-white">Speciality</label>
+                                    <input type="text" name="speciality" id="speciality"
+                                           value="{{ user.profile.speciality }}"
+                                           placeholder="{{ user.profile.speciality }}"
+                                           class="text-sm dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white "
+                                           required/>
+                                </div>
+                                <div class="inputSettings">
+                                    <label for="course"
+                                           class="mb-2 text-sm font-medium dark:text-white">Course</label>
+                                    <input type="number" name="course" id="course" value="{{ user.profile.course }}"
+                                           placeholder="{{ user.profile.course }}"
+                                           class="text-sm dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                                           pattern="^[1-4]$" required/>
+                                </div>
+                            </div>
+                            {% for message in messages %}
+                                <h1 style="font-size: 14px; margin: 10px 0; color: #bc2525">{{ message }}</h1>
+                            {% endfor %}
+                            <button type="submit"
+                                    class="float-right text-white bg-blue-700 hover:bg-blue-800 rounded-lg text-base px-5 py-2.5 text-center">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Change password -->
+                <form action="{% url 'userauths:change_password' %}" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <div class="space-y-5">
+                            <h1 class="text-3xl font-medium">Change Password</h1>
+                            <p class="text-base">All sessions except the current session will be terminated. This will
+                                prevent unauthorized access to your account.</p>
+                            <p class="text-base">Password must contain at least 6 characters, including numbers, letters
+                                and special characters (!$@%).</p>
+                        </div>
+
+                        <div class="editChangePass">
+                            <div class="mb-7">
+                                <input type="password" name="current_password" id="password"
+                                       class="text-sm dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                                       placeholder="Current Password" required/>
+                            </div>
+                            <div class="mb-7">
+                                <input type="password" name="new_password" id="new_password"
+                                       class="text-sm dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                                       placeholder="New Password" required/>
+                            </div>
+                            <div class="mb-7">
+                                <input type="password" name="confirm_password" id="confirm_password"
+                                       class="text-sm dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                                       placeholder="Enter the new password again" required/>
+                            </div>
+
+                            {% for message in messages %}
+                                <h1 style="font-size: 14px; margin: 10px 0; color: #bc2525">{{ message }}</h1>
+                            {% endfor %}
+
+                            <button type="submit"
+                                    class="float-right text-white bg-blue-700 hover:bg-blue-800 rounded-lg text-base px-5 py-2.5 text-center">
+                                Change password
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+
+                <!-- Privaty policy -->
+                <div>
+                    <div class="space-y-5">
+                        <h1 class="text-3xl font-medium">Privacy Policy</h1>
+
+                        <p class="text-base">Last updated: June 29, 2024</p>
+
+                        <p class="text-base">The Graduate Limited ("us", "we", or "our") operates the
+                            <a href="">http://www.ayustyr.kz</a> website (the "Service").</p>
+
+                        <p class="text-base">This page informs you of our policies regarding the collection, use and
+                            disclosure of Personal Information when you use our Service.
+                            </p>
+
+                        <p class="text-base">We will not use or share your information with anyone except as described in
+                            this Privacy Policy.</p>
+
+                        <p class="text-base">We use your Personal Information for providing and improving the Service.
+                            By using the Service, you agree to the collection and use of information in
+                            accordance with this policy. Unless otherwise defined in this Privacy Policy.
+                            terms used in this Privacy Policy have the same meanings as in our Terms and
+                            Conditions, accessible at <a href="">http://www.ayustyr.kz</a></p>
+                    </div>
+                </div>
+
+                <!-- Help Desk -->
+                <div class="editHelpDesk">
+                    <ul uk-accordion="multiple: true">
+                        <li class="uk-open">
+                            <a class="uk-accordion-title text-xl" href>FAQ about Auystyr</a>
+                            <div class="uk-accordion-content">
+                                <h1 class="text-xl">Which payment gateways does the theme support?</h1>
+                                <p class="base">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="uk-accordion-title text-xl" href>Report a problem</a>
+                            <div class="uk-accordion-content">
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
