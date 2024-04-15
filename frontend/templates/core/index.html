@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'assets/css/main_register.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/main_register.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -282,49 +282,47 @@
     <div id="create-post-modal" class="create-post is-story" uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-5 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
 
-            <form id="post-form" method="POST" enctype="multipart/form-data">
+            <form class="create_post_form_container" id="post-form" method="POST" enctype="multipart/form-data" action="{% url 'core:create_post' %}">
                 {% csrf_token %}
                 <div class="text-center py-3 border-b">
                     <h3 class="text-lg font-semibold"> Create Post </h3>
                     <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
                 </div>
-                <div class="flex flex-1 items-start space-x-4 p-5">
-                    <img src="{{ request.user.profile.image.url }}" class="bg-gray-200 border border-white rounded-full w-11 h-11">
+                <div class="flex flex-1 items-start space-x-4" style="display: flex; align-items: center;">
+                    <div class="create_post_main_user_profile_image"
+                         style="background-image: url('{{ request.user.profile.image.url }}');"
+                    ></div>
                     <div class="flex-1 pt-2">
-                        <textarea class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="What's Your Mind, {{request.user|title}}!" name="post-caption" id="post-caption"></textarea>
+                        <input type="text" name="title" id="title" style="font-size: 15px;" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" placeholder="What's Your Mind, {{request.user|title}}!"/>
                     </div>
                 </div>
+                <input type="text" name="author" id="author" placeholder="Author">
+                <textarea name="description" id="description" cols="5" rows="3" placeholder="Description"></textarea>
+                <input type="text" name="genre" id="genre" placeholder="Genre">
+                <input type="number" name="publication_year" id="publication_year" placeholder="Publication Year">
                 
                 <script>
-                    var loadFile = function (event) {
-                      var output2 = document.getElementById("preview_post_thumbnail");
-                      output2.src = URL.createObjectURL(event.target.files[0]);
-                      output2.onload = function () {
-                        URL.revokeObjectURL(output2.src); // free memory
-                      };
-                    };
+                    function loadFile(event) {
+                        document.getElementById('file-name').textContent = event.target.files[0].name;
+                    }
                 </script> 
 
 
-                <div class="bsolute bottom-0 p-4 space-x-4 w-full">
-                    <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-2 shadow-sm items-center">
-                        <div class="lg:block hidden ml-1"> Add to your post </div>
-                        <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">
-
-
-                            <label for="post-thumbnail"> 
-                                <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <div class="bsolute bottom-0 space-x-4 w-full">
+                    <div class="flex bg-gray-50 border border-purple-100 rounded-2xl shadow-sm items-center">
+                        <div class="flex flex-1 items-center lg:justify-end justify-center">
+                            <span id="file-name" class="ml-2"></span>
+                            <label for="image">
+                                <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             </label>
-
-                            <input onchange="loadFile(event)" name="post-thumbnail" class="d-none " type="file" id="post-thumbnail">
-
-                        
+                            <input onchange="loadFile(event)" name="image" class="d-none" type="file" id="image">
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center w-full justify-between border-t p-3">
+
+                <div class="flex items-center w-full justify-between border-t create_post_padding_line">
     
-                    <select class="selectpicker mt-2 story" id="visibility">
+                    <select class="selectpicker mt-2 story" id="visibility" name="visibility">
                         <option value="Everyone">Everyone</option>
                         <option value="Only me">Only me</option>
                        

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 import core.views
-from core.models import Post
+from core.models import Post, BookExchangeRequest
 from userauths.models import Profile, User
 from userauths.forms import UserRegisterForm
 
@@ -82,6 +82,7 @@ def LoginView(request):
     return HttpResponseRedirect("/")
 
 
+@csrf_exempt
 def LogoutView(request):
     logout(request)
     messages.success(request, "You are logged in!")
@@ -92,12 +93,12 @@ def LogoutView(request):
 def my_profile(request):
     profile = request.user.profile
     posts = Post.objects.filter(active=True, user=request.user)
-
+    count_exchange = BookExchangeRequest.objects.filter(sender=request.user).count()
 
     context = {
         "profile": profile,
         "posts": posts,
-
+        "count_exchange": count_exchange
     }
 
     template_name = "userauths/my_profile.html"
@@ -105,49 +106,63 @@ def my_profile(request):
     return render(request, template_name, context)
 
 
+@csrf_exempt
+def settings(request):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        birthday = request.POST.get('birthday')
+        speciality = request.POST.get('speciality')
+        course = request.POST.get('course')
+        current_password = request.POST.get('current_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+
+        user = request.user
+        profile = Profile.objects.get(user=user)
+
+        user.first_name = first_name if first_name else user.first_name
+        user.last_name = last_name if last_name else user.last_name
+        user.full_name = first_name + " " + last_name if first_name and last_name else user.full_name
+        user.username = username if username else user.username
+        user.email = email if email else user.email
+        user.save()
+
+        profile.full_name = first_name + " " + last_name if first_name and last_name else profile.full_name
+        profile.birthday = birthday if birthday else profile.birthday
+        profile.speciality = speciality if speciality else profile.speciality
+        profile.course = course if course else profile.course
+        profile.save()
+
+        print("birthday:", birthday)
+
+    return render(request, "userauths/settings.html")
 
 
+@csrf_exempt
+def change_password(request):
+    if request.method == "POST":
+        current_password = request.POST.get('current_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
 
+        user = request.user
 
+        if user.check_password(current_password):
+            if new_password == confirm_password:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, "Password changed successfully")
 
+                user = authenticate(request, email=user.email, password=new_password)
+                login(request, user)
 
+                return redirect("userauths:settings")
+            messages.error(request, "Password does not match")
+            return redirect("userauths:settings")
+        messages.error(request, "Current Password does not match")
+        return redirect("userauths:settings")
 
-
-
-
-
-
-# def validate_username(request):
-#     username = request.GET.get('username', None)
-#     data = {
-#         'is_taken': Profile.objects.filter(username__iexact=username).exists()
-#     }
-#     print(data)
-#     return JsonResponse(data)
-
-
-
-# @login_required
-# def profile(request, username=None):
-#     report_form = ReportUserForm()
-#     user = get_object_or_404(User, username=username)
-#     post_list = Post.objects.filter(author=user).order_by('-id')
-#     post_count = post_list.count()
-#     page = request.GET.get('page', 1)
-#     paginator = Paginator(post_list, 4)
-#     try:
-#         posts = paginator.page(page)
-#     except PageNotAnInteger:
-#         posts = paginator.page(1)
-#     except EmptyPage:
-#         posts = paginator.page(paginator.num_pages)
-#
-#     context = {
-#         'report_form': report_form,
-#         'posts': posts,
-#         'user_id': user,
-#         'post_count': post_count,
-#     }
-#     template_name = 'users/profile.html'
-#
-#     return render(request, template_name, context)
+    return render(request, "userauths/settings.html")

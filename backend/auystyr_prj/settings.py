@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "exchange",
     "events",
     "quiz",
+    "chat",
 
     "userauths",
     "core",
