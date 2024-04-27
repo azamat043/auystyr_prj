@@ -41,6 +41,9 @@
 #rejected{
     background-color: #F6D6D6;
 }
+#accepted{
+    background-color: #92FFB1;
+}
 #ended{
     background-color: #D2D2D2;
 }

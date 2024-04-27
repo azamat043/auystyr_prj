@@ -38,7 +38,9 @@
                 <div class="eventPart" style="padding-bottom: 50px;">
                     <div class="events_create_title_block">
                         <h1 class="text-3xl font-medium">Events</h1>
-                        <a href="{% url 'event_create' %}">Create</a>
+                        {% if user.is_superuser %}
+                            <a href="{% url 'event_create' %}">Create</a>
+                        {% endif %}
                     </div>
                     <div class="grid md:grid-cols-3 gap-x-2.5 gap-y-2.5">
                         {% for event in events %}

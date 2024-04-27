@@ -105,8 +105,9 @@
 
                                 <!-- Buttons-->
                                 <div class="flex float-right py-5" id="change_status_exchange">
-                                    <button value="rejected" class="text-base py-2 px-4 rounded-2xl" href="#" style="background-color: #FF9292; color: #3A0000;">Reject</button>
-                                    <button value="accepted" class="text-base py-2 px-4 rounded-2xl ml-4" href="#" style="background-color: #92FFB1; color: #003A02;">Accept</button>
+                                    <button id="reject_exchange_btn" value="rejected" class="text-base py-2 px-4 rounded-2xl" href="#" style="background-color: #FF9292; color: #3A0000;">Reject</button>
+                                    <button id="accept_exchange_btn" value="accepted" class="text-base py-2 px-4 rounded-2xl ml-4" href="#" style="background-color: #92FFB1; color: #003A02;">Accept</button>
+                                    <button id="delete_exchange_btn" value="deleted" class="text-base py-2 px-4 rounded-2xl ml-4" onclick="deleteExchange()" style="background-color: #FF9292; color: #3A0000;">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +151,7 @@
                 <!-- Outcoming -->
                 <div>
                     {% for out in outgoing %}
-                        <div class="flex justify-center mb-7">
+                        <div class="flex mb-7">
                             <div class="requestRow">
                                 <div class="justify-between request">
                                     <div class="requestDescription flex items-center">
@@ -194,26 +195,46 @@
             let statuses = document.querySelectorAll('#change_status_exchange');
             statuses.forEach(status => {
                 status.addEventListener('click', (e) => {
-                    fetch('/change_status_exchange/' + request_id, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': '{{ csrf_token }}'
-                        },
-                        body: JSON.stringify({
-                            status: e.target.value
-                        })
-                    }).then(response => response.json())
-                        .then(data => {
-                            console.log(data)
-                            if (data.status === 200) {
-                                window.location.reload();
+                    if (e.target.value === "deleted") {
+                        fetch('/delete_exchange/' + request_id, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': '{{ csrf_token }}'
                             }
-                            else {
-                                alert(data.message);
-                            }
-                        })
-                        .catch(err => console.log(err))
+                        }).then(response => response.json())
+                            .then(data => {
+                                console.log(data)
+                                if (data.status === 200) {
+                                    window.location.reload();
+                                }
+                                else {
+                                    alert(data.message);
+                                }
+                            })
+                            .catch(err => console.log(err))
+                    }
+                    else {
+                        fetch('/change_status_exchange/' + request_id, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': '{{ csrf_token }}'
+                            },
+                            body: JSON.stringify({
+                                status: e.target.value
+                            })
+                        }).then(response => response.json())
+                            .then(data => {
+                                console.log(data)
+                                if (data.status === 200) {
+                                    window.location.reload();
+                                } else {
+                                    alert(data.message);
+                                }
+                            })
+                            .catch(err => console.log(err))
+                    }
                 })
             })
         }
@@ -246,14 +267,22 @@
                     document.getElementById('exchange_post_status').innerText = exchangeData.current_status;
                     document.getElementById('exchange_request_date').innerText = exchangeData.request_date;
 
-                    if (exchangeData.current_status == 'rejected' || exchangeData.current_status == 'accepted' || exchangeData.is_outgoing === true) {
+                    if (exchangeData.is_outgoing !== true) {
                         statuses.forEach(status => {
-                            status.style.display = 'none';
+                            document.querySelector('#delete_exchange_btn').style.display = 'none';
                         })
+                    }
+                    else if (exchangeData.current_status == 'rejected' || exchangeData.current_status == 'accepted' || exchangeData.is_outgoing === true) {
+                        statuses.forEach(status => {
+                            document.querySelector('#reject_exchange_btn').style.display = 'none';
+                            document.querySelector('#accept_exchange_btn').style.display = 'none';
+                        })
+                        document.querySelector('#delete_exchange_btn').style.display = 'block';
                     }
                     else {
                         statuses.forEach(status => {
-                            status.style.display = 'block';
+                            document.querySelector('#reject_exchange_btn').style.display = 'block';
+                            document.querySelector('#accept_exchange_btn').style.display = 'block';
                         })
                     }
 

@@ -6,7 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 import core.views
+<<<<<<< HEAD
 from core.models import Post, BookExchangeRequest
+=======
+from core.models import Post, BookExchangeRequest, SavedPost
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
 from userauths.models import Profile, User
 from userauths.forms import UserRegisterForm
 
@@ -92,12 +96,23 @@ def LogoutView(request):
 @login_required
 def my_profile(request):
     profile = request.user.profile
+<<<<<<< HEAD
     posts = Post.objects.filter(active=True, user=request.user)
+=======
+    library = Post.objects.filter(active=True, user=request.user, visibility="Only me")
+    posts = Post.objects.filter(active=True, user=request.user,  visibility="Everyone")
+    saved_posts = SavedPost.objects.filter(user=request.user)
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
     count_exchange = BookExchangeRequest.objects.filter(sender=request.user).count()
 
     context = {
         "profile": profile,
+        "library": library,
         "posts": posts,
+<<<<<<< HEAD
+=======
+        "saved_posts": saved_posts,
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
         "count_exchange": count_exchange
     }
 
@@ -147,6 +162,8 @@ def change_password(request):
         current_password = request.POST.get('current_password')
         new_password = request.POST.get('new_password')
         confirm_password = request.POST.get('confirm_password')
+<<<<<<< HEAD
+=======
 
         user = request.user
 
@@ -166,3 +183,56 @@ def change_password(request):
         return redirect("userauths:settings")
 
     return render(request, "userauths/settings.html")
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
+
+        user = request.user
+
+<<<<<<< HEAD
+        if user.check_password(current_password):
+            if new_password == confirm_password:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, "Password changed successfully")
+=======
+def upload_image(request):
+    if request.method == "POST":
+        image = request.FILES.get('image')
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        profile.image = image
+        profile.save()
+
+    return JsonResponse({"message": "Image uploaded successfully", "status": 200})
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
+
+                user = authenticate(request, email=user.email, password=new_password)
+                login(request, user)
+
+<<<<<<< HEAD
+                return redirect("userauths:settings")
+            messages.error(request, "Password does not match")
+            return redirect("userauths:settings")
+        messages.error(request, "Current Password does not match")
+        return redirect("userauths:settings")
+
+    return render(request, "userauths/settings.html")
+=======
+def upload_cover_image(request):
+    if request.method == "POST":
+        image = request.FILES.get('image')
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        profile.cover_image = image
+        profile.save()
+
+    return JsonResponse({"message": "Image uploaded successfully", "status": 200})
+
+
+def delete_image(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    profile.image = "default.jpg"
+    profile.save()
+
+    return JsonResponse({"message": "Image deleted successfully", "status": 200})
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1

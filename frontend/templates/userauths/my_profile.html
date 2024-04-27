@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/main_register.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/profile.css' %}">
+<<<<<<< HEAD
+=======
+    <link rel="stylesheet" href="{% static 'core/css/main_register.css' %}">
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 {% endblock %}
 
@@ -29,6 +33,7 @@
                             <img src="{{ user.profile.image.url }}" alt="">
                         </div>
                     </div>
+<<<<<<< HEAD
 
                     <div class="profile_info">
                         <h1 class="text-2xl font-bold">{{ user.username }}</h1>
@@ -116,11 +121,16 @@
                                 </div>
                             </div>
                         </div>
+=======
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
 
+                    <div class="profile_info">
+                        <h1 class="text-2xl font-bold">{{ user.username }}</h1>
                     </div>
 
                 </div>
 
+<<<<<<< HEAD
             </div>
 
             <div class="uk-switcher" id="sections">
@@ -448,8 +458,577 @@
                 </div>
 
             </div>
+=======
+                <!-- Navigation -->
+                <div class="flex justify-between lg:border-t border-gray-100 flex-col-reverse lg:flex-row pt-2 mx-12">
+                    <nav class="responsive-nav pl-3">
+                        <ul uk-switcher="connect: #sections; animation: uk-animation-fade">
+                            <li><a href="#"> Info </a></li>
+                            <li><a href="#"> Library </a></li>
+                            <li><a href="#"> Post </a></li>
+                            <li><a href="#"> Saved </a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- button actions -->
+                    <div class="flex items-center space-x-1.5 flex-shrink-0 pr-4 mb-2 justify-center order-1 relative">
+
+                        <!-- add post -->
+                        <button class="flex items-center justify-center h-10 px-5 rounded-md bg-blue-600 text-white space-x-1.5 hover:text-white"
+                                uk-toggle="target: #create-post-modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
+                                <path fill-rule="evenodd"
+                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                            <span> Add Post </span>
+                        </button>
+
+                        <!-- Create post modal -->
+                        <div id="create-post-modal" class="create-post is-story" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-5 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
+
+                                <form class="create_post_form_container" id="post-form" method="POST"
+                                      enctype="multipart/form-data" action="{% url 'core:create_post' %}">
+                                    {% csrf_token %}
+                                    <div class="text-center py-3 border-b">
+                                        <h3 class="text-lg font-semibold"> Create Post </h3>
+                                        <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 right-2"
+                                                type="button" uk-close
+                                                uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
+                                    </div>
+                                    <div class="flex flex-1 items-start space-x-4"
+                                         style="display: flex; align-items: center;">
+                                        <div class="create_post_main_user_profile_image"
+                                             style="background-image: url('{{ request.user.profile.image.url }}');"
+                                        ></div>
+                                        <div class="flex-1 pt-2">
+                                            <input type="text" name="title" id="title" style="font-size: 15px;"
+                                                   class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none"
+                                                   placeholder="What's Your Mind, {{ request.user|title }}!"/>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="author" id="author" placeholder="Author">
+                                    <textarea name="description" id="description" cols="5" rows="3"
+                                              placeholder="Description"></textarea>
+                                    <input type="text" name="genre" id="genre" placeholder="Genre">
+                                    <input type="number" name="publication_year" id="publication_year"
+                                           placeholder="Publication Year">
+
+                                    <script>
+                                        function loadFile(event) {
+                                            document.getElementById('file-name').innerHTML = event.target.files[0].name;
+                                        }
+                                    </script>
+
+
+                                    <div class="bsolute bottom-0 space-x-4 w-full">
+                                        <div class="flex bg-gray-50 border border-purple-100 rounded-2xl shadow-sm items-center">
+                                            <div class="flex flex-1 items-center lg:justify-end justify-center">
+                                                <span id="file-name" class="ml-2"></span>
+                                                <label for="image">
+                                                    <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer"
+                                                         fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2"
+                                                              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                    </svg>
+                                                </label>
+                                                <input name="image" class="d-none" type="file" id="image" onchange="loadFile(event)">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center w-full justify-between border-t create_post_padding_line">
+
+                                        <select class="selectpicker mt-2 story" id="visibility" name="visibility">
+                                            <option value="Everyone">Everyone</option>
+                                            <option value="Only me">Only me</option>
+
+                                        </select>
+
+                                        <div class="flex space-x-2">
+
+                                            <button href="#" type="submit"
+                                                    class="bg-blue-600 flex h-9 items-center justify-center rounded-md text-white px-5 font-medium">
+                                                Share
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <!-- Edit post modal -->
+                        <div class="create-post is-story" uk-modal id="edit-post-modal">
+                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-5 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
+                                <form class="create_post_form_container" id="post-form">
+                                    {% csrf_token %}
+                                    <div class="text-center py-3 border-b">
+                                        <h3 class="text-lg font-semibold"> Edit Post </h3>
+                                        <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 right-2"
+                                                type="button" uk-close
+                                                uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
+                                    </div>
+                                    <div class="flex flex-1 items-start space-x-4"
+                                         style="display: flex; align-items: center;">
+                                        <div class="create_post_main_user_profile_image"
+                                             style="background-image: url('{{ request.user.profile.image.url }}');"
+                                        ></div>
+                                        <div class="flex-1 pt-2">
+                                            <input type="text" name="title" id="post_edit_title" style="font-size: 15px;"
+                                                   class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none"
+                                                   placeholder="What's Your Mind, {{ request.user|title }}!"/>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="author" id="post_edit_author" placeholder="Author">
+                                    <textarea name="description" id="post_edit_description" cols="5" rows="3"
+                                              placeholder="Description"></textarea>
+                                    <input type="text" name="genre" id="post_edit_genre" placeholder="Genre">
+                                    <input type="number" name="publication_year" id="post_edit_publication_year"
+                                           placeholder="Publication Year">
+                                    <div class="bsolute bottom-0 space-x-4 w-full">
+                                        <div class="flex bg-gray-50 border border-purple-100 rounded-2xl shadow-sm items-center">
+                                            <div class="flex flex-1 items-center lg:justify-end justify-center">
+                                                <span id="file-name" class="ml-2"></span>
+                                                <label for="image">
+                                                    <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer"
+                                                         fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2"
+                                                              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                    </svg>
+                                                </label>
+                                                <input name="image" type="file" id="post_edit_image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center w-full justify-between border-t create_post_padding_line">
+                                        <select class="selectpicker mt-2 story" id="post_edit_visibility" name="visibility">
+                                            <option value="Everyone">Everyone</option>
+                                            <option value="Only me">Only me</option>
+                                        </select>
+                                        <div class="flex space-x-2">
+                                            <button id="edit_post_data_btn" type="submit" class="bg-blue-600 flex h-9 items-center justify-center rounded-md text-white px-5 font-medium">
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="uk-switcher" id="sections">
+
+                <!-- Info Section -->
+                <div class="infoSection">
+                    <div>
+                        <div class="userInformation">
+                            <div><h1 class="text-xl mb-2.5">Full name</h1></div>
+                            <div class="flex items-center infoArea">
+                                <img src="{% static 'assets/images/icons/userInfoFname.png' %}" alt="">
+                                <p class="text-lg">{{ user.full_name }}</p>
+                            </div>
+                        </div>
+
+                        <div class="userInformation">
+                            <div><h1 class="text-xl mb-2.5">Email</h1></div>
+                            <div class="flex items-center infoArea">
+                                <img src="{% static 'assets/images/icons/userInfoEmail.png' %}" alt="">
+                                <p class="text-lg">{{ user.email }}</p>
+                            </div>
+                        </div>
+
+                        <div class="userInformation">
+                            <div><h1 class="text-xl mb-2.5">Speciality</h1></div>
+                            <div class="flex items-center infoArea">
+                                <img src="{% static 'assets/images/icons/userInfoSpec.png' %}" alt="">
+                                <p class="text-lg">{{ user.profile.speciality }}</p>
+                            </div>
+                        </div>
+
+                        <div class="userInformation">
+                            <div><h1 class="text-xl mb-2.5">Birthday</h1></div>
+                            <div class="flex items-center infoArea">
+                                <img src="{% static 'assets/images/icons/userInfoBirth.png' %}" alt="">
+                                <p class="text-lg">{{ user.profile.birthday }}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex userInformation">
+
+                            <div class="infoAreaDel">
+                                <div><h1 class="text-xl mb-2.5">Course</h1></div>
+                                <div class="flex items-center infoArea">
+                                    <img src="{% static 'assets/images/icons/userInfoCourse.png' %}" alt="">
+                                    <p class="text-lg">{{ user.profile.course }}</p>
+                                </div>
+                            </div>
+
+                            <div class="infoAreaDel">
+                                <div><h1 class="text-xl mb-2.5">Exchanges</h1></div>
+                                <div class="flex items-center infoArea">
+                                    <img src="{% static 'assets/images/icons/userInfoExchange.png' %}" alt="">
+                                    <p class="text-lg">{{ count_exchange }}</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Library  -->
+                <div class="">
+                    <div style="margin-bottom: 30px;">
+                        {% for post in library %}
+                            <div class="card lg:mx-0" id="post_style_design" style="padding-bottom: 30px;">
+
+                                <!-- post header-->
+                                <div class="flex justify-between items-center lg:p-4 p-2.5">
+                                    <div class="flex flex-1 items-center space-x-4">
+                                        <a href="#">
+                                            <img src="{{ post.user.get_photo }}"
+                                                 class="bg-gray-200 border border-white rounded-full w-10 h-10">
+                                        </a>
+                                        <div class="flex-1 font-semibold capitalize">
+                                            <a href="#" class="text-black dark:text-gray-100">{{ post.user.username }}</a>
+                                            <div class="text-gray-700 flex items-center space-x-2"> 5 <span> hrs </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <!-- <img class="post-right" src="assets/images/save_ic.png" alt="" /> -->
+                                            <!-- more icon -->
+                                            <a href="#"
+                                               class="flex items-center justify-center h-10 w-10 rounded-md bg-gray-100">
+                                                <ion-icon name="ellipsis-horizontal" class="text-xl"></ion-icon>
+                                            </a>
+                                            <!-- more drowpdown -->
+                                            <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700"
+                                                 uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small; offset:5">
+                                                <ul class="space-y-1">
+                                                    <li>
+                                                        <a href="{% url 'core:change_visibility' post.id %}"
+                                                           class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                                            <ion-icon name="push" class="pr-2 text-lg"></ion-icon>
+                                                            Post
+                                                        </a>
+                                                    </li>
+                                                    <li uk-toggle="target: #edit-post-modal" id="edit-post-open-btn" data-post-id="{{ post.id }}">
+                                                        <div data-post-id="{{ post.id }}"
+                                                           class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                                            <ion-icon name="pencil" class="pr-2 text-xl"></ion-icon>
+                                                            Edit
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{% url 'core:delete_post' post.id %}"
+                                                           class="flex items-center px-3 py-2 text-red-500 hover:bg-red-50 hover:text-red-500 rounded-md dark:hover:bg-red-600">
+                                                            <ion-icon name="trash" class="pr-2 text-xl"></ion-icon>
+                                                            Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="row_postCenter">
+                                    <div class="descriptionForBookMobile">
+                                        <p class="Name_Book_Users" id="Name_Book_Users_mobile">{{ post.title }}</p>
+                                        <p class="Geroy_Book_Users" id="Geroy_Book_Users_mobile">{{ post.author }}</p>
+                                        <p class="Year_Book_Users" id="Year_Book_Users_mobile">{{ post.publication_year }}</p>
+                                        <p class="Type_Book_Users" id="Type_Book_Users_mobile">{{ post.genre }}</p>
+                                        <p class="Desc_Book_Users" id="Desc_Book_Users_mobile">{{ post.description }}</p>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div uk-lightbox class="post_image_center">
+                                            <a href="{{ post.image.url }}">
+                                                <img src="{{ post.image.url }}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="descriptionForBook">
+                                            <p class="Name_Book_Users" id="Name_Book_Users_web">{{ post.title }}</p>
+                                            <p class="Geroy_Book_Users" id="Geroy_Book_Users_web">{{ post.author }}</p>
+                                            <p class="Year_Book_Users" id="Year_Book_Users_web">{{ post.publication_year }}</p>
+                                            <p class="Type_Book_Users" id="Type_Book_Users_web">{{ post.genre }}</p>
+                                            <p class="Desc_Book_Users" id="Desc_Book_Users_web">{{ post.description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Post  -->
+                <div class="">
+                    <div style="margin-bottom: 30px;">
+                        {% for post in posts %}
+                            <div class="card lg:mx-0" id="post_style_design" style="padding-bottom: 30px;">
+
+                                <!-- post header-->
+                                <div class="flex justify-between items-center lg:p-4 p-2.5">
+                                    <div class="flex flex-1 items-center space-x-4">
+                                        <a href="#">
+                                            <img src="{{ post.user.get_photo }}"
+                                                 class="bg-gray-200 border border-white rounded-full w-10 h-10">
+                                        </a>
+                                        <div class="flex-1 font-semibold capitalize">
+                                            <a href="#" class="text-black dark:text-gray-100">{{ post.user.username }}</a>
+                                            <div class="text-gray-700 flex items-center space-x-2"> 5 <span> hrs </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <!-- <img class="post-right" src="assets/images/save_ic.png" alt="" /> -->
+                                            <!-- more icon -->
+                                            <a href="#"
+                                               class="flex items-center justify-center h-10 w-10 rounded-md bg-gray-100">
+                                                <ion-icon name="ellipsis-horizontal" class="text-xl"></ion-icon>
+                                            </a>
+                                            <!-- more drowpdown -->
+                                            <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700"
+                                                 uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small; offset:5">
+                                                <ul class="space-y-1">
+                                                    <li>
+                                                        <a href="{% url 'core:change_visibility' post.id %}"
+                                                           class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                                            <ion-icon name="push" class="pr-2 text-lg"></ion-icon>
+                                                            Unpost
+                                                        </a>
+                                                    </li>
+                                                    <li uk-toggle="target: #edit-post-modal" id="edit-post-open-btn" data-post-id="{{ post.id }}">
+                                                        <div data-post-id="{{ post.id }}"
+                                                           class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                                            <ion-icon name="pencil" class="pr-2 text-xl"></ion-icon>
+                                                            Edit
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{% url 'core:delete_post' post.id %}"
+                                                           class="flex items-center px-3 py-2 text-red-500 hover:bg-red-50 hover:text-red-500 rounded-md dark:hover:bg-red-600">
+                                                            <ion-icon name="trash" class="pr-2 text-xl"></ion-icon>
+                                                            Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="row_postCenter">
+                                    <div class="descriptionForBookMobile">
+                                        <p class="Name_Book_Users" id="Name_Book_Users_mobile">{{ post.title }}</p>
+                                        <p class="Geroy_Book_Users" id="Geroy_Book_Users_mobile">{{ post.author }}</p>
+                                        <p class="Year_Book_Users" id="Year_Book_Users_mobile">{{ post.publication_year }}</p>
+                                        <p class="Type_Book_Users" id="Type_Book_Users_mobile">{{ post.genre }}</p>
+                                        <p class="Desc_Book_Users" id="Desc_Book_Users_mobile">{{ post.description }}</p>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div uk-lightbox class="post_image_center">
+                                            <a href="{{ post.image.url }}">
+                                                <img src="{{ post.image.url }}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="descriptionForBook">
+                                            <p class="Name_Book_Users" id="Name_Book_Users_web">{{ post.title }}</p>
+                                            <p class="Geroy_Book_Users" id="Geroy_Book_Users_web">{{ post.author }}</p>
+                                            <p class="Year_Book_Users" id="Year_Book_Users_web">{{ post.publication_year }}</p>
+                                            <p class="Type_Book_Users" id="Type_Book_Users_web">{{ post.genre }}</p>
+                                            <p class="Desc_Book_Users" id="Desc_Book_Users_web">{{ post.description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Saved  -->
+                <div class="">
+                    <div style="margin-bottom: 30px;">
+                        {% for post in saved_posts %}
+                            <div class="card lg:mx-0" id="post_style_design" style="padding-bottom: 30px;">
+
+                                <!-- post header-->
+                                <div class="flex justify-between items-center lg:p-4 p-2.5">
+                                    <div class="flex flex-1 items-center space-x-4">
+                                        <a href="#">
+                                            <img src="{{ post.post.user.get_photo }}"
+                                                 class="bg-gray-200 border border-white rounded-full w-10 h-10">
+                                        </a>
+                                        <div class="flex-1 font-semibold capitalize">
+                                            <a href="#" class="text-black dark:text-gray-100">{{ post.post.user.username }}</a>
+                                            <div class="text-gray-700 flex items-center space-x-2"> 5 <span> hrs </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href="{% url 'core:save_post' post.post.id %}" class="d-flex flex-row justify-content-between">
+                                            <i>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                     fill="#000" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+                                                    <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5z"></path>
+                                                    <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1z"></path>
+                                                </svg>
+                                            </i>
+                                        </a>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="row" id="row_postCenter">
+                                    <div class="descriptionForBookMobile">
+                                        <p class="Name_Book_Users" id="Name_Book_Users_mobile">{{ post.post.title }}</p>
+                                        <p class="Geroy_Book_Users" id="Geroy_Book_Users_mobile">{{ post.post.author }}</p>
+                                        <p class="Year_Book_Users" id="Year_Book_Users_mobile">{{ post.post.publication_year }}</p>
+                                        <p class="Type_Book_Users" id="Type_Book_Users_mobile">{{ post.post.genre }}</p>
+                                        <p class="Desc_Book_Users" id="Desc_Book_Users_mobile">{{ post.post.description }}</p>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div uk-lightbox class="post_image_center">
+                                            <a href="{{ post.post.image.url }}">
+                                                <img src="{{ post.post.image.url }}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="descriptionForBook">
+                                            <p class="Name_Book_Users" id="Name_Book_Users_web">{{ post.post.title }}</p>
+                                            <p class="Geroy_Book_Users" id="Geroy_Book_Users_web">{{ post.post.author }}</p>
+                                            <p class="Year_Book_Users" id="Year_Book_Users_web">{{ post.post.publication_year }}</p>
+                                            <p class="Type_Book_Users" id="Type_Book_Users_web">{{ post.post.genre }}</p>
+                                            <p class="Desc_Book_Users" id="Desc_Book_Users_web">{{ post.post.description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
 
         </div>
     </div>
 
+<<<<<<< HEAD
+=======
+    <script>
+        let editPostBtn = document.querySelectorAll('#edit-post-open-btn');
+
+        editPostBtn.forEach(post => {
+            post.addEventListener('click', (e) => {
+                let title = document.getElementById('post_edit_title');
+                let author = document.getElementById('post_edit_author');
+                let description = document.getElementById('post_edit_description');
+                let genre = document.getElementById('post_edit_genre');
+                let publication_year = document.getElementById('post_edit_publication_year');
+                let image = document.getElementById('post_edit_image');
+                let visibility = document.getElementById('post_edit_visibility');
+
+                let post_id = e.target.getAttribute('data-post-id');
+
+                fetch('/get_post_info/' + post_id)
+                    .then(response => response.json())
+                    .then(data => {
+                        data = data.data;
+                        console.log(data);
+
+                        title.value = data.exchange_user_post_title;
+                        author.value = data.exchange_user_post_author;
+                        description.value = data.description;
+                        genre.value = data.genre;
+                        publication_year.value = data.publication_year;
+                        visibility.value = data.visibility;
+
+                        image.setAttribute('files', data.exchange_user_post_image);
+                        image.addEventListener('change', (e) => {
+                            image.files = e.target.files;
+                            console.log(image.files)
+                        });
+
+                        console.log(image.files);
+
+                        let selectElement = document.getElementById('post_edit_visibility');
+                        selectElement.value = data.visibility;
+                        $(selectElement).selectpicker('refresh');
+                    })
+                    .catch(error => console.log(error));
+            })
+        })
+    </script>
+
+    <script>
+        let editPostData = document.querySelector('#edit_post_data_btn');
+
+        editPostData.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            let title = document.getElementById('post_edit_title').value;
+            let author = document.getElementById('post_edit_author').value;
+            let description = document.getElementById('post_edit_description').value;
+            let genre = document.getElementById('post_edit_genre').value;
+            let publication_year = document.getElementById('post_edit_publication_year').value;
+            let image = document.getElementById('post_edit_image');
+            let visibility = document.getElementById('post_edit_visibility').value;
+
+            let post_id = document.querySelector('#edit-post-open-btn').getAttribute('data-post-id');
+
+            let formData = new FormData();
+            formData.append('title', title);
+            formData.append('author', author);
+            formData.append('description', description);
+            formData.append('genre', genre);
+            formData.append('publication_year', publication_year);
+            formData.append('visibility', visibility);
+
+            // Если пользователь выбрал новое изображение, добавляем его к форме FormData
+            if (image.files.length > 0) {
+                formData.append('image', image.files[0]);
+            }
+
+            fetch('/edit_post/' + post_id, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                location.reload();
+            })
+            .catch(error => console.log(error));
+        });
+    </script>
+
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
 {% endblock %}

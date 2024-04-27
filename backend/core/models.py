@@ -14,8 +14,8 @@ VISIBILITY = (
 
 BOOK_REQUEST = (
     ('pending', 'pending'),
-    ('accept', 'accept'),
-    ('reject', 'reject'),
+    ('accepted', 'accepted'),
+    ('rejected', 'rejected'),
 
 )
 
@@ -77,6 +77,20 @@ class Post(models.Model):
     def post_comments_count(self):
         comments_count = Comment.objects.filter(post=self, active=True).count()
         return comments_count
+
+
+class SavedPost(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.post.title
+
+    class Meta:
+        verbose_name = 'Saved Post'
+        verbose_name_plural = "Saved Posts"
+        db_table = "saved_post"
 
 
 class Bookshelf(models.Model):

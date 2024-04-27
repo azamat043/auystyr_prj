@@ -1,5 +1,7 @@
 from django.contrib import admin
-from core.models import Post, Bookshelf, BookExchangePartner, BookExchangeRequest, Comment, Event, ReplyComment, Notification, EventPost, Page
+from core.models import Post, Bookshelf, BookExchangePartner, BookExchangeRequest, Comment, Event, ReplyComment, \
+    Notification, EventPost, Page, SavedPost
+
 
 # Register your models here.
 
@@ -58,6 +60,7 @@ class PageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(SavedPost)
 admin.site.register(Bookshelf, BookshelfAdmin)
 admin.site.register(BookExchangeRequest, BookExchangeRequestAdmin)
 admin.site.register(BookExchangePartner, PartnerAdmin)

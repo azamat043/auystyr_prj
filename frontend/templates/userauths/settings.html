@@ -37,12 +37,21 @@
                     <div class="profile user-profile">
 
                         <div class="profiles_banner">
+<<<<<<< HEAD
                             <img src="{% static 'assets/images/category/profileBanner.png' %}" alt="">
                             <div class="absolute bottom-0 right-0  p-3 text-sm z-50 lg:flex">
                               <a href="#" class="flex items-center justify-center h-8 px-3 rounded-md bg-gray-700 bg-opacity-70 text-white space-x-1.5">
                                   <ion-icon name="create-outline" class="text-xl"></ion-icon>
                                   <span> Edit </span>
                               </a>
+=======
+                            <img src="{{ user.profile.cover_image.url }}" alt="">
+                            <div class="absolute bottom-0 right-0  p-3 text-sm z-50 lg:flex">
+                              <div onclick="editCoverImage()" class="flex items-center justify-center h-8 px-3 rounded-md bg-gray-700 bg-opacity-70 text-white space-x-1.5 cursor-pointer">
+                                  <ion-icon name="create-outline" class="text-xl"></ion-icon>
+                                  <span> Edit </span>
+                              </div>
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
                           </div>
                         </div>
 
@@ -56,14 +65,23 @@
                             </div>
 
                             <div class="profile_info">
+<<<<<<< HEAD
                                 <h1 class="text-2xl font-bold"> {{ user.username }} </h1>
+=======
+                                <h1 class="text-2xl font-bold">{{ user.username }}</h1>
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
                             </div>
 
                         </div>
 
                         <div class="flex justify-center editButtons">
+<<<<<<< HEAD
                             <button class="mr-2.5"><img class="pr-2.5" src="{% static 'assets/images/icons/add.png' %}" alt=""><h1 class="text-base">Upload Image</h1></button>
                             <button><img class="pr-2.5" src="{% static 'assets/images/icons/delete.png' %}" alt=""><h1 class="text-base">Delete</h1></button>
+=======
+                            <button id="upload_image_btn" onclick="uploadImage()" class="mr-2.5"><img class="pr-2.5" src="{% static 'assets/images/icons/add.png' %}" alt=""><h1 class="text-base">Upload Image</h1></button>
+                            <button onclick="deleteImage()"><img class="pr-2.5" src="{% static 'assets/images/icons/delete.png' %}" alt=""><h1 class="text-base">Delete</h1></button>
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
                         </div>
 
                     </div>
@@ -240,4 +258,71 @@
         </div>
     </div>
 
+<<<<<<< HEAD
 {% endblock %}
+=======
+    <script>
+        function uploadImage() {
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.click();
+
+            input.onchange = function() {
+                let file = input.files[0];
+                let formData = new FormData();
+                formData.append('image', file);
+                fetch('{% url "userauths:upload_image" %}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+
+        function deleteImage() {
+            fetch('{% url "userauths:delete_image" %}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function editCoverImage() {
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.click();
+
+            input.onchange = function() {
+                let file = input.files[0];
+                let formData = new FormData();
+                formData.append('image', file);
+                fetch('{% url "userauths:upload_cover_image" %}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+    </script>
+
+{% endblock %}
+>>>>>>> d6be1699d7337e7f3e743afbf9877a22324f4ce1
