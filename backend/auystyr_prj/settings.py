@@ -230,3 +230,5 @@ JAZZMIN_UI_TWEAKS = {
 }
 
 SECURE_PROXY_SSL_HEADER = env("SECURE_PROXY_SSL_HEADER", default=None)
+
+CSRF_TRUSTED_ORIGINS = ["https://auystyr.kz", "https://www.auystyr.kz", "http://localhost:8000", "http://127.0.0.1:8000"]
