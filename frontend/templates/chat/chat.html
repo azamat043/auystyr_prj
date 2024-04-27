@@ -33,13 +33,12 @@
                     <div class="messages-inbox-inner" data-simplebar>
                         <ul>
                             {% for contact in contacts %}
-                                <li class="message-user" onclick="loadMessagesWithUser({{ contact.user_id }})">
+                                <li class="message-user" id="contact_{{ contact.user_id }}" onclick="loadMessagesWithUser({{ contact.user_id }})">
                                     <a href="#">
                                         <div class="message-avatar">
-                                            <i class="status-icon status-online"></i
-                                            ><img src="{{ contact.image }}" alt=""/>
+                                            <i class="status-icon status-online"></i>
+                                            <img src="{{ contact.image }}" alt=""/>
                                         </div>
-
                                         <div class="message-by">
                                             <div class="message-by-headline">
                                                 <h5>{{ contact.name }}</h5>
@@ -180,7 +179,54 @@
     </div>
 
     <script>
+        document.querySelector('#send_message_to_user').addEventListener('click', () => {
+            let userID = document.querySelector('.message-user.active').id.split('_')[1]; // Получаем ID активного контакта
+            let message = document.getElementById('input_messages_send').value;
+            if (message === '') {
+                return;
+            }
+            fetch(`/chat/send_message_to_user/${userID}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ message: message })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.status === 200) {
+                        let messageBubble = document.createElement('div');
+                        messageBubble.classList.add('message-bubble');
+                        messageBubble.classList.add('me');
+                        messageBubble.innerHTML = `
+                            <div class="message-bubble-inner">
+                                <div class="message-avatar">
+                                    <img src="${data.sender_image}" alt="">
+                                </div>
+                                <div class="message-text">
+                                    <p>${message}</p>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        `;
+                        let messagesContainer = document.querySelector('.message-content-inner');
+                        messagesContainer.appendChild(messageBubble);
+                        document.getElementById('input_messages_send').value = '';
+                    }
+                });
+        });
+
+        // Функция загрузки сообщений с пользователем
         function loadMessagesWithUser(userID) {
+            // Убираем класс active у всех элементов
+            document.querySelectorAll('.message-user').forEach(item => {
+                item.classList.remove('active');
+            });
+            // Добавляем класс active к выбранному элементу
+            document.getElementById('contact_' + userID).classList.add('active');
+
             fetch(`/chat/get_message_with_user/${userID}`)
                 .then(response => response.json())
                 .then(data => {
@@ -217,45 +263,6 @@
                         `;
                         messagesContainer.appendChild(messageBubble);
                     });
-
-                    document.querySelector('#send_message_to_user').addEventListener('click', () => {
-                        let message = document.getElementById('input_messages_send').value;
-                        if (message === '') {
-                            return;
-                        }
-                        fetch(`/chat/send_message_to_user/${userID}/`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRFToken': '{{ csrf_token }}'
-                            },
-                            body: JSON.stringify({ message: message })
-                        })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log(data);
-                                if (data.status === 200) {
-                                    let messageBubble = document.createElement('div');
-                                    messageBubble.classList.add('message-bubble');
-                                    messageBubble.classList.add('me');
-                                    messageBubble.innerHTML = `
-                                        <div class="message-bubble-inner">
-                                            <div class="message-avatar">
-                                                <img src="${data.sender_image}" alt="">
-                                            </div>
-                                            <div class="message-text">
-                                                <p>${message}</p>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    `;
-                                    messagesContainer.appendChild(messageBubble);
-                                    document.getElementById('input_messages_send').value = '';
-                                }
-                            });
-
-                    })
-
                 });
         }
     </script>

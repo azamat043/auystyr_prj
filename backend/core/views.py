@@ -1,11 +1,12 @@
 import json
 
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.shortcuts import render, redirect
 import shortuuid
 from rest_framework.views import APIView
 
 from auystyr_prj import settings
-from core.models import Post, Comment, BookExchangeRequest
+from core.models import Post, Comment, BookExchangeRequest, SavedPost
 from django.utils.text import slugify
 from django.http import JsonResponse
 from django.utils.timesince import timesince
@@ -22,12 +23,15 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect("userauths:sign-in")
     posts = Post.objects.filter(active=True, visibility="Everyone").order_by('-id')
+    saved_posts_list = SavedPost.objects.filter(user=request.user)
+    saved_posts = [saved_post.post.id for saved_post in saved_posts_list]
 
     my_posts = Post.objects.filter(user=request.user, active=True)
 
     context = {
         "posts": posts,
-        "my_posts": my_posts
+        "my_posts": my_posts,
+        "saved_posts": saved_posts
     }
 
     return render(request, "core/index.html", context)
@@ -66,27 +70,38 @@ def create_post(request):
     return redirect("/")
 
 
+def edit_post(request, pk):
+    post = Post.objects.get(id=pk)
+
+    image_files = request.FILES.get("image")
+    print(request.POST)
+    print(request.FILES)
+    if image_files:
+        print("image_files", image_files)
+        post.image = image_files
+
+    post.title = request.POST.get("title")
+    post.author = request.POST.get("author")
+    post.description = request.POST.get("description")
+    post.genre = request.POST.get("genre")
+    post.publication_year = request.POST.get("publication_year")
+    post.visibility = request.POST.get("visibility")
+
+    post.save()
+
+    return JsonResponse({"data": "Post updated!", "status": 200})
+
+
 @csrf_exempt
-def save_post(request):
-    id = request.GET['id']
-    post = Post.objects.get(id=id)
-    user = request.user
-    bool = False
+def save_post(request, pk):
+    post = Post.objects.get(id=pk)
 
-    if user in post.likes.all():
-        post.likes.remove(user)
-        bool = False
-
+    if SavedPost.objects.filter(user=request.user, post=post).exists():
+        SavedPost.objects.filter(user=request.user, post=post).delete()
     else:
-        post.likes.add(user)
-        bool = True
+        SavedPost.objects.create(user=request.user, post=post)
 
-    data = {
-        "bool": bool,
-        "likes": post.likes.all().count()
-    }
-
-    return JsonResponse({"data": data})
+    return redirect("/")
 
 
 @csrf_exempt
@@ -147,7 +162,11 @@ def get_post_info(request, pk):
         "exchange_user_username": post.user.username,
         "exchange_user_post_image": post.image.url,
         "exchange_user_post_title": post.title,
-        "exchange_user_post_author": post.author
+        "exchange_user_post_author": post.author,
+        "description": post.description,
+        "genre": post.genre,
+        "publication_year": post.publication_year,
+        "visibility": post.visibility
     }
 
     return JsonResponse({"data": data})
@@ -225,6 +244,13 @@ def change_status_exchange(request, exchange_id):
         return JsonResponse({"message": "No data", "status": 400})
 
 
+def delete_exchange(request, exchange_id):
+    exchange = BookExchangeRequest.objects.get(id=exchange_id)
+    exchange.delete()
+
+    return JsonResponse({"data": "Exchange deleted!", "status": 200})
+
+
 def search_post(request):
     query = request.GET.get("query")
 
@@ -239,3 +265,24 @@ def search_post(request):
         })
 
     return JsonResponse({"data": data})
+
+
+def change_visibility(request, pk):
+    post = Post.objects.get(id=pk)
+
+    if post.visibility == "Everyone":
+        post.visibility = "Only me"
+    else:
+        post.visibility = "Everyone"
+
+    post.save()
+
+    return redirect("userauths:my-profile")
+
+
+def delete_post(request, pk):
+    post = Post.objects.get(id=pk)
+    post.active = False
+    post.save()
+
+    return redirect("userauths:my-profile")

@@ -276,18 +276,33 @@
                     data.forEach(post => {
                         find_post_list.innerHTML += `
                             <li>
-                                <a href="#">
+                                <a href="#post_id_${post.id}" class="post_object_block">
                                     <img src="${post.image}" alt="" class="list-avatar">
                                     <div class="list-name">${post.title}</div>
                                 </a>
                             </li>
                         `
-                    })
-                })
+                    });
+
+                    scrollToFirstPost();
+                });
         } else {
             find_post_list.innerHTML = `
                 <h1 style="font-size: 14px; padding: 5px;">No post found</h1>
             `;
+        }
+    }
+
+    function scrollToFirstPost() {
+        const firstPostLink = find_post_list.querySelector('.post_object_block');
+        if (firstPostLink) {
+            const targetId = firstPostLink.getAttribute('href');
+            const targetPosition = document.querySelector(targetId).offsetTop;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
         }
     }
 

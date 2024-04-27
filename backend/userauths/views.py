@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 import core.views
-from core.models import Post, BookExchangeRequest
+from core.models import Post, BookExchangeRequest, SavedPost
 from userauths.models import Profile, User
 from userauths.forms import UserRegisterForm
 
@@ -92,12 +92,16 @@ def LogoutView(request):
 @login_required
 def my_profile(request):
     profile = request.user.profile
-    posts = Post.objects.filter(active=True, user=request.user)
+    library = Post.objects.filter(active=True, user=request.user, visibility="Only me")
+    posts = Post.objects.filter(active=True, user=request.user,  visibility="Everyone")
+    saved_posts = SavedPost.objects.filter(user=request.user)
     count_exchange = BookExchangeRequest.objects.filter(sender=request.user).count()
 
     context = {
         "profile": profile,
+        "library": library,
         "posts": posts,
+        "saved_posts": saved_posts,
         "count_exchange": count_exchange
     }
 
@@ -166,3 +170,34 @@ def change_password(request):
         return redirect("userauths:settings")
 
     return render(request, "userauths/settings.html")
+
+
+def upload_image(request):
+    if request.method == "POST":
+        image = request.FILES.get('image')
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        profile.image = image
+        profile.save()
+
+    return JsonResponse({"message": "Image uploaded successfully", "status": 200})
+
+
+def upload_cover_image(request):
+    if request.method == "POST":
+        image = request.FILES.get('image')
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        profile.cover_image = image
+        profile.save()
+
+    return JsonResponse({"message": "Image uploaded successfully", "status": 200})
+
+
+def delete_image(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    profile.image = "default.jpg"
+    profile.save()
+
+    return JsonResponse({"message": "Image deleted successfully", "status": 200})
