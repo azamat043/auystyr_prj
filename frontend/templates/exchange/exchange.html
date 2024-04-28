@@ -267,8 +267,10 @@
                     document.getElementById('exchange_post_status').innerText = exchangeData.current_status;
                     document.getElementById('exchange_request_date').innerText = exchangeData.request_date;
 
-                    if (exchangeData.is_outgoing !== true) {
+                    if (exchangeData.is_outgoing !== true && exchangeData.current_status !== 'pending') {
                         statuses.forEach(status => {
+                            document.querySelector('#reject_exchange_btn').style.display = 'none';
+                            document.querySelector('#accept_exchange_btn').style.display = 'none';
                             document.querySelector('#delete_exchange_btn').style.display = 'none';
                         })
                     }
@@ -283,6 +285,7 @@
                         statuses.forEach(status => {
                             document.querySelector('#reject_exchange_btn').style.display = 'block';
                             document.querySelector('#accept_exchange_btn').style.display = 'block';
+                            document.querySelector('#delete_exchange_btn').style.display = 'none';
                         })
                     }
 
